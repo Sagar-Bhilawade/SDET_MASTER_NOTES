@@ -1,17 +1,17 @@
 # SDET Master Notes
 
 ## 🎯 The Goal
-This repository is an evolving **Living Knowledge Base** for SDET architectural patterns and technical deep-dives. It bridges the gap between official documentation and production-grade implementation, serving as a long-term reference for building and maintaining enterprise-scale automation frameworks.
+This repository is an evolving **Living Knowledge Base** for SDET architectural patterns and technical deep-dives. It focuses on **In-Depth Tutorial Notes** organized chronologically to facilitate deep learning and master-level understanding of automation frameworks.
 
 ## 👨‍💻 Professional Context (Sagar B.)
 The content here is battle-tested and modeled after the following architectural pillars:
 
-1.  **Cloud-Native E2E (Playwright / TS / Kubernetes):** * Focus on dynamic environment testing, K8s namespace isolation, and reducing CI/CD feedback loops via GitHub Actions and parallel execution.
-2.  **Enterprise API Validation (RestAssured / Java / SQL):** * Focus on full contract validation, Request/Response SpecBuilders, and DB-to-API data integrity verification.
-3.  **Legacy Web Regeneration (Selenium / Java / POM):** * Focus on stabilizing monolithic web applications, eliminating flakiness through Fluent Waits, and Jenkins Master-Slave distributed execution.
+1.  **Cloud-Native E2E (Playwright / TS / Kubernetes):** Focus on dynamic environments and CI/CD pipelines.
+2.  **Enterprise API Validation (RestAssured / Java / SQL):** Focus on full contract validation and DB integrity.
+3.  **Legacy Web Regeneration (Selenium / Java / POM):** Focus on stabilizing and modernizing monolithic applications.
 
 ## 📂 Repository Structure
-This repository is organized by **Domain**, allowing you to focus your revision on specific interview tracks.
+Organized by **Domain** and sub-folder for targeted revision.
 
 ### 01_API_Automation
 *   **01_Foundations**: Core concepts (Statelessness, Idempotency, HTTP).
@@ -34,9 +34,13 @@ This repository is organized by **Domain**, allowing you to focus your revision 
 ### 06_Build_Tools
 *   **Maven, Gradle, and Multi-module project structures.**
 
-## 🛠️ Note Generation Protocol
-We follow a **"User-First Research"** flow:
-1.  **User Research:** The user reads in-depth documentation from official sources.
-2.  **AI Synthesis:** The agent synthesizes these findings into high-density notes using the **AGENT_INSTRUCTIONS.md**.
-3.  **Gap Analysis:** The agent proactively suggests "Industry Extras" that were missing from the official docs.
-4.  **Slow & Deep:** We prioritize technical depth and edge-case coverage over speed.
+## 🛠️ Note Generation Protocol (In-Depth Tutorials)
+We follow a **"Deep & Chronological"** flow:
+1.  **Fundamental Theory**: Understanding the "Why" before the "How".
+2.  **Step-by-Step Evolution**: Implementation steps moving from basic snippets to advanced optimization.
+3.  **Exhaustive Encyclopedia**: Every single component (matchers, functions, variables) listed with detailed code examples and their respective source libraries/packages.
+4.  **Industrial Application**: Mapping features to professional framework utilities.
+
+### 🛡️ Content Preservation Policy
+- **No Destruction:** Existing tutorial steps are preserved. New information is added as subsequent phases.
+- **In-Depth Over Compact:** We never sacrifice detail for brevity. Every file aims to be a complete guide.

@@ -1,67 +1,48 @@
-## RestAssured DSL - given(), when(), then()
+# 02: Core DSL Syntax (Given / When / Then)
 
-### 1. ⚡ Flashcard Summary (30-Second Review)
+### 1. Summary of Why (Architectural Context)
+RestAssured follows the **BDD (Behavior Driven Development)** pattern. This separation of concerns ensures that test code reads like a requirement document:
+- **Given:** Pre-conditions (Auth, Headers, Payload).
+- **When:** The Action (HTTP Method + Endpoint).
+- **Then:** The Post-conditions (Assertions & Extraction).
+- **Senior Tip:** This structure enforces **Statelessness**. Every `given()` block should ideally contain everything needed for that specific request to succeed in isolation.
 
-- **Status:** The BDD-style structure for writing expressive API tests.
-- **Why it matters:** Clearly separates Pre-requisites, Actions, and Assertions.
-- **Key Keywords:** RequestSpecification, ResponseSpecification, Matchers, Extraction.
-
-### 2. 🏛️ Architectural Context (The "Why")
-
-- **Behavioral Alignment:** By mirroring Gherkin, these tests can be understood by developers, QA, and even product owners.
-- **Stateless Verification:** Each block ensures that the Request is built without cross-contaminating other tests.
-- **Problem vs. Solution:**
-    - *Problem:* Complex headers and authentication lead to redundant "Spaghetti Code."
-    - *Solution:* `RequestSpecification` allows you to pre-define the "Given" block and reuse it across multiple tests.
-
-### 3. 🛠️ Implementation & Mermaid Workflow (The "How")
-
-**The DSL Execution Lifecycle:**
-
-```mermaid
-graph LR
-    A[Given: Prep] --> B[When: Action]
-    B --> C[Then: Validate]
-    C --> D[Extract: Results]
-```
-
-**Clean Production Syntax:**
+### 2. Clean Code (Production-Ready Snippets)
+A professional request combines multiple pre-conditions and strict post-condition validation.
 
 ```java
-// Reusable Spec
-RequestSpecification spec = new RequestSpecBuilder()
-    .setBaseUri("https://api.myapp.com")
-    .setContentType(ContentType.JSON)
-    .build();
-
-given()
-    .spec(spec)
-    .body(payload)
-.when()
-    .post("/v1/create")
-.then()
-    .statusCode(201)
-    .body("id", notNullValue());
+Response response = 
+    given()
+        .baseUri("https://api.example.com")
+        .header("Content-Type", "application/json")
+        .auth().oauth2("your_token")
+        .cookie("session_id", "12345")
+        .queryParam("status", "active")
+        .pathParam("userId", 101)
+        .body(payloadObject)
+    .when()
+        .post("/users/{userId}")
+    .then()
+        .log().ifValidationFails() // Industry Standard: Log only if something is wrong
+        .statusCode(201)
+        .header("Content-Encoding", "gzip")
+        .extract().response(); // Extracting the full response object for further use
 ```
 
-### 4. ⚖️ The Comparison Matrix (given() vs. RequestSpec)
+### 3. The "Industry Gap" (Missing in Documentation)
+- **Param Nuances:**
+    - `queryParam()`: Appended to the URL (`?key=val`). Used for filtering.
+    - `pathParam()`: Replaces template variables in the URL (`/users/{id}`).
+    - `formParam()`: Sent in the body as `application/x-www-form-urlencoded`.
+- **Extraction Techniques:** 
+    - `extract().path("id")`: Fast JSON path extraction.
+    - `extract().as(User.class)`: Direct deserialization into a POJO.
+- **Header Best Practices:** In real-world enterprise apps, headers like `X-Request-ID` or `X-Client-Version` are mandatory. Always parameterize these rather than hard-coding them in every `given()` block.
 
-| Feature | given()... | RequestSpecification |
-| :--- | :--- | :--- |
-| **Scope** | Local to a single test | Reusable across multiple classes |
-| **Maintenance** | High (Updates needed per test) | Low (Centralized update) |
-| **Readability** | Good for short tests | Best for complex enterprise suites |
-| **Flexibility** | Ad-hoc overrides | Structured Base-URI/Auth |
-
-### 5. 🎤 The "Senior Ace" Q&A
-
-- **Q:** *"Can we run a test without given()? And what is the benefit of including it?"*
-- **A:** "Technically, you can start with `when().get()`. However, `given()` is the 'entry point' for the RestAssured DSL. It provides the placeholder for headers, params, and auth. Including it even when empty maintains the **BDD (Behavior Driven Development)** structure, which is essential for team consistency and readability in larger frameworks."
-
-### 6. ⚠️ The Gotcha (Production Battle Scars)
-
-- **The "Return Type" Trap:** Calling `.then()` returns a `ValidatableResponse`. If you need to use the ID of a created user in the next test, you MUST call `.extract().jsonPath()`—you cannot call `.then().get("id")`.
-- **Spec Leakage:** Using global static `RestAssured.baseURI` can cause issues during **Parallel Execution**. 
-    - *Senior Solution:* Always pass an explicit `RequestSpecification` instance to `given().spec(mySpec)` to ensure thread isolation.
-- **Extracting vs Validating:** Beginners often perform assertions inside `.then()`, but if they need data for a DB check, they fail to extract it properly. 
-    - *Senior Tip:* Separate the "Validation API" (`then().body()`) from the "Extraction API" (`extract().as()`).
+### 4. The Gotcha (Senior Insight)
+- **The Extraction Order Trap:** You can extract *before* assertions, but a Senior SDET always asserts *before* extracting. If the status code isn't 200, extracting the body might throw a `NullPointerException` or a parsing error. **Always validate `statusCode()` before `extract()`.**
+- **Cookie Persistence:** If your API uses session cookies, don't manually parse them. Use `.extract().cookies()` to get a `Map<String, String>` and pass it directly to the next `.cookies(map)` call.
+- **Interview Trap (PATCH vs PUT):**
+    - *"How do you code a partial update in your DSL?"*
+    - **Answer:** Use `.when().patch()`. Passing a partial body to `.put()` is a common junior mistake that can lead to data loss (nullifying fields not present in the payload).
+- **Log Bloating:** Never use `.log().all()` in a CI/CD pipeline. It generates megabytes of text which can crash Jenkins/GitHub Actions log viewers. Use `.log().ifValidationFails()` or `.log().ifError()`.

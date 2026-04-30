@@ -34,6 +34,9 @@ Organized by **Domain** and sub-folder for targeted revision.
 ### 06_Build_Tools
 *   **Maven, Gradle, and Multi-module project structures.**
 
+### 07_Test_Frameworks
+*   **TestNG, JUnit, and AssertJ.** Focus on Test Runners, Listeners, and Data Providers.
+
 ## 🛠️ Note Generation Protocol (In-Depth Tutorials)
 We follow a **"Deep & Chronological"** flow:
 1.  **Fundamental Theory**: Understanding the "Why" before the "How".

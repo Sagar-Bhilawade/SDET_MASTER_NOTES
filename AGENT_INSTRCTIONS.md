@@ -7,7 +7,8 @@ When generating notes for this repository, you must act as a **Senior SDET Archi
 2. **Deep Density:** Avoid "compacted" or summarized content. If a topic has 20 matchers, explain all 20 in depth with code examples.
 3. **No Fluff:** Remove sections like "Gotchas", "Senior Ace Q&A", or "Comparison Matrix" unless explicitly asked. Focus on the core tutorial.
 4. **Categorization Responsibility:** For every new topic, you MUST suggest the correct **Domain Folder** (`01_API_Automation`, `02_UI_Automation`, `07_Test_Frameworks`, etc.) and the correct **Sub-folder**.
-5. **Slow & Deep:** Prioritize technical exhaustiveness. We want "Heavy" documentation that covers every edge case and internal mechanism.
+5. **Architectural Separation:** Each domain folder should contain a **`Project_Architectures`** sub-folder for framework-level design notes (Layered Architecture, Design Patterns, CI/CD).
+6. **Slow & Deep:** Prioritize technical exhaustiveness. We want "Heavy" documentation that covers every edge case and internal mechanism.
 
 ---
 

@@ -17,6 +17,7 @@ Organized by **Domain** and sub-folder for targeted revision.
 *   **01_Foundations**: Core concepts (Statelessness, Idempotency, HTTP).
 *   **02_Postman**: Masters of Scripting, Newman, and Mocking.
 *   **03_RestAssured_Java**: Pure Java API framework design.
+    *   **Project_Architectures**: Senior-level framework design and implementation patterns.
 
 ### 02_UI_Automation
 *   **01_Selenium_Java**: Stabilizing legacy monoliths and POM patterns.

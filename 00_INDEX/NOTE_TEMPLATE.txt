@@ -1,0 +1,27 @@
+==========================================================
+NOTE TEMPLATE
+==========================================================
+
+TOPIC:
+
+1. WHAT IT IS
+
+2. WHY IT MATTERS
+
+3. INTERVIEW ANSWER - SHORT
+
+4. INTERVIEW ANSWER - DETAILED
+
+5. REAL PROJECT EXAMPLE
+
+6. COMMON QUESTIONS
+- 
+- 
+- 
+
+7. QUICK REVISION POINTS
+- 
+- 
+- 
+
+==========================================================

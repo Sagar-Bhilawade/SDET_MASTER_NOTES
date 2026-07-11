@@ -1,0 +1,95 @@
+==========================================================
+TOPIC TRACKER
+==========================================================
+
+STATUS LEGEND
+[ ] Not Started
+[~] In Progress
+[x] Revised
+
+01_PLAYWRIGHT
+
+01_BASICS
+[ ] What is Playwright
+[ ] Why Playwright over Selenium
+[ ] Browser, Context, Page
+[ ] Locators
+[ ] Auto-waiting
+[ ] Assertions
+[ ] Actions and interactions
+[ ] Debugging basics
+[ ] Playwright test runner basics
+
+02_FRAMEWORK
+[ ] Framework folder structure
+[ ] Page Object Model / abstraction approach
+[ ] Fixtures
+[ ] Hooks
+[ ] Storage state
+[ ] Config file
+[ ] Environment handling
+[ ] Parallel execution and retries
+[ ] Reporting
+
+03_API_TESTING
+[ ] APIRequestContext
+[ ] GET / POST / PUT / DELETE
+[ ] Headers and auth
+[ ] Payload handling
+[ ] Response validation
+[ ] UI + API combined flow
+[ ] API-based test data setup
+
+04_TYPESCRIPT
+[ ] let / const / var
+[ ] functions and arrow functions
+[ ] async / await
+[ ] promises
+[ ] arrays and objects
+[ ] map / filter / reduce
+[ ] types and interfaces
+[ ] classes basics
+[ ] modules and imports
+[ ] error handling
+
+05_CICD_AND_EXECUTION
+[ ] GitHub Actions flow
+[ ] Azure DevOps flow
+[ ] How tests run in CI
+[ ] Handling reports and failures
+[ ] K8s / environment discussion
+
+06_MOCK_QA
+[ ] Self-intro for Playwright roles
+[ ] 30-second project explanation
+[ ] 2-minute project explanation
+[ ] Common Playwright interview questions
+[ ] Scenario-based questions
+
+02_SELENIUM_JAVA
+
+01_SELENIUM_UI
+[ ] Selenium basics
+[ ] Waits
+[ ] Locators
+[ ] POM
+[ ] Flaky test handling
+
+02_RESTASSURED_API
+[ ] Request building
+[ ] Response validation
+[ ] Auth and token handling
+[ ] SpecBuilder basics
+
+03_SQL_AND_DB
+[ ] SQL validation basics
+[ ] API-to-DB validation
+[ ] Common SQL questions
+
+04_FRAMEWORK_AND_BUILD
+[ ] TestNG
+[ ] Maven
+[ ] Jenkins
+[ ] Legacy project explanation
+
+==========================================================

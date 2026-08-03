@@ -1,0 +1,89 @@
+==========================================================
+HOW TO STUDY (SAGAR BHILAWADE)
+==========================================================
+
+The topic list now lives in SDET_MASTER_NOTES. This file is only about METHOD.
+
+No fixed schedule. No daily quota. Study when there's time — one topic or ten.
+
+==========================================================
+THE PREP MODEL
+==========================================================
+
+Every session has three parts. The second one is where the value is.
+
+1. READ
+   - Work through one note
+   - Understand the concept, not the syntax
+
+2. RECALL - OUT LOUD
+   - Close the note
+   - Say the 30-second answer, then the 2-minute answer
+   - Say it out loud, not in your head
+
+3. MARK THE GAPS
+   - Note where you hesitated or blanked
+   - Those are the topics to return to
+
+Rule:
+Reading for two hours is not preparation. Recall is preparation.
+The gap between "I understand this" and "I can explain this cleanly"
+only shows up when you speak it — and an interview is the worst place
+to discover it.
+
+==========================================================
+PER-TOPIC METHOD
+==========================================================
+
+For every note:
+
+1. Understand the concept
+2. Locate it in your own project (BASES_PLAYWRIGHT or CIP_LEGACY)
+3. Say the 30-second answer without looking
+4. Say the 2-minute answer without looking
+5. Say the TRADE-OFF — what does this approach cost?
+6. Have the obvious follow-up question ready
+
+Step 5 is the one most people skip, and it's the seniority signal.
+Every design answer should name a cost, not just a benefit.
+
+==========================================================
+PRIORITY ORDER
+==========================================================
+
+1. Playwright basics and framework design
+2. Flakiness, troubleshooting, real-world problems
+3. API testing and SQL
+4. CI/CD — Azure DevOps, GitHub Actions, Docker, Kubernetes
+5. Selenium / Java depth (interviewers WILL probe the 2 years)
+6. Leadership, architecture decisions, tool selection
+7. Interview communication, design questions, behavioral stories
+
+==========================================================
+SUCCESS CRITERIA
+==========================================================
+
+Not time-based. You are ready when you can:
+
+- Explain both frameworks end to end, as decisions with trade-offs
+- Answer Playwright and Selenium fundamentals without hesitation
+- Give five root causes for flakiness, and say why retries aren't the fix
+- Explain where auto-waiting stops (element ready ≠ data ready)
+- Explain ThreadLocal driver management and why remove() matters
+- Discuss API testing across both RestAssured and Playwright request context
+- Write the common SQL patterns from memory
+- Argue tool selection, including when NOT to pick Playwright
+- Tell your impact stories in 2-3 minutes each
+- Handle a 45-60 minute loop without running out of depth
+
+==========================================================
+RULES
+==========================================================
+
+- Interviews are part of prep, not something to earn by finishing prep
+- Speak answers out loud; re-reading feels productive and isn't
+- Every metric you state must match the resume
+- Never claim a tool that isn't on the resume
+- Keep freelancing entirely out of the job-switch narrative
+
+==========================================================

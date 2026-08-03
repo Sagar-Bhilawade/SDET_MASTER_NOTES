@@ -291,7 +291,7 @@ Read from it, never copy from it. Anything worth keeping gets rewritten into the
 | AI efficiency gain | 30% | BASES_PLAYWRIGHT |
 | Awards | 2x Quarterly Award | NielsenIQ |
 
-Source of truth: `Resume & Coverletters/Resume.tex`.
+Source of truth: `JOB_PIPELINE/assets/Resume.tex`.
 Metrics appear in ~11 notes only — never scatter them further.
 
 ---

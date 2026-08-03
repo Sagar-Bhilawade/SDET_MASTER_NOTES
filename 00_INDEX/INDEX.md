@@ -25,6 +25,7 @@ foundation  →  tools  →  application  →  practice  →  seniority  →  de
 | **06** | LEADERSHIP_AND_ARCHITECTURE | Above the tools — decisions and trade-offs |
 | **07** | INTERVIEW_PREP | Packaging it for delivery |
 | **08** | QUICK_REVISION | Revision layer (planned, after learning pass) |
+| **09** | EXTERNAL_REFS | Borrowed PDFs — read from, never copy. Gitignored |
 
 **Placement rule:** if the answer changes on a different tool → inside a track folder (02/03).
 If the answer would be identical in a Selenium interview → top level.
@@ -237,6 +238,24 @@ Tool-agnostic. **Theory paired directly with its practice** — read in order.
 
 Revision layer, deliberately deferred until the learning pass is done.
 Planned as round-based cheat sheets + a living weak-spots file.
+
+---
+
+## 09_EXTERNAL_REFS — Borrowed material (not counted as notes)
+
+Moved here from the old workspace-root `Prep/` folder. **Gitignored** — copyrighted
+third-party PDFs stay on disk, out of version control.
+
+| Folder | What it is |
+|--------|-----------|
+| `JavaScript/` | Reference books, snippet collections |
+| `Typescript/` | TypeScript notes PDF |
+| `Playwright/` | Udemy course material, framework-explanation deck |
+| `Playwright/PlaywrightLearning.md` | **Sagar's own raw course log** (Feb 2026) — mine it for topics |
+| `Office_Projects/PlaywrightTS/` | Internal NielsenIQ repo guide — never leaves the machine |
+
+Read from it, never copy from it. Anything worth keeping gets rewritten into the
+8-section format in his own words. See `09_EXTERNAL_REFS/README.md`.
 
 ---
 

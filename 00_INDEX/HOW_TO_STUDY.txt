@@ -84,6 +84,6 @@ RULES
 - Speak answers out loud; re-reading feels productive and isn't
 - Every metric you state must match the resume
 - Never claim a tool that isn't on the resume
-- Keep freelancing entirely out of the job-switch narrative
+- Keep the job-switch narrative strictly SDET-focused and resume-backed
 
 ==========================================================

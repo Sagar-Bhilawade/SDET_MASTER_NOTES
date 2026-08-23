@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**117 notes** · Last updated: 2026-08-20
+**118 notes** · Last updated: 2026-08-23
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -27,6 +27,7 @@ foundation  →  tools  →  application  →  practice  →  seniority  →  de
 | **08** | QUICK_REVISION | Revision layer — round-based cheat sheets + living weak-spots file |
 | **09** | EXTERNAL_REFS | Borrowed PDFs — read from, never copy. Gitignored |
 | **10** | PRACTICAL_ROUNDS | Live/practical rounds — coding, SQL, locators, code review, live UI/API, take-home |
+| **11** | AI_IN_TESTING | AI-assisted QA workflows, agents, story/PR analysis, automation drafting |
 
 **Placement rule:** if the answer changes on a different tool → inside a track folder (02/03).
 If the answer would be identical in a Selenium interview → top level.
@@ -53,6 +54,7 @@ Each cross-references the other two.
 | Manager / senior | `06_LEADERSHIP_AND_ARCHITECTURE` |
 | HR / behavioral | `07_INTERVIEW_PREP` |
 | Live coding / SQL / locators / code review / take-home | `10_PRACTICAL_ROUNDS` |
+| AI in testing / agentic QA / AI-assisted automation | `11_AI_IN_TESTING` |
 | Final revision (any round) | `08_QUICK_REVISION` |
 
 ---
@@ -328,6 +330,28 @@ The in-depth locator guide — CSS, XPath, and finding elements in practice. Int
 | 04 | Playwright Locators | `getByRole`, filter/chaining, strictness, lazy = no stale elements |
 | 05 | Selenium Locators | 8 `By` strategies, findElement vs findElements, **stale-element problem** |
 | 06 | Finding & Debugging Locators | DevTools workflow, dynamic IDs, iframes, shadow DOM, tables |
+
+---
+
+## 11_AI_IN_TESTING (1) 🟡
+
+Expanding section for AI-assisted QA workflows. This is separate from Playwright tooling
+because interviewers increasingly ask about AI across the whole testing lifecycle: Jira,
+PR review, test design, regression selection, automation candidates, script drafting, and
+bug reporting.
+
+| # | Note | Covers |
+|---|------|--------|
+| 01 | AI-Augmented QA Workflow | QA Knowledge Agent, automation agent setup, PR/Jira analysis, test-plan/case drafting, automation conversion, review gates |
+
+Planned additions after real interview/office-PC detail:
+
+- PR and Jira Story Analysis
+- AI-Assisted Test Plan And Functional Case Generation
+- Regression Case Selection And Coverage Tracking
+- Manual Flow To Playwright Automation Drafts
+- AI-Assisted Bug Drafting And Defect Quality
+- Review Gates For AI-Generated Tests
 
 ---
 

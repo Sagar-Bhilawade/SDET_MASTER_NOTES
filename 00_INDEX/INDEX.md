@@ -342,7 +342,7 @@ bug reporting.
 
 | # | Note | Covers |
 |---|------|--------|
-| 01 | AI-Augmented QA Workflow | QA Knowledge Agent, automation agent setup, PR/Jira analysis, test-plan/case drafting, automation conversion, review gates |
+| 01 | AI-Augmented QA Workflow | QA Knowledge Agent, QA Automation Agent, PR/Jira analysis, test-plan/case drafting, automation conversion, review gates |
 
 Planned additions after real interview/office-PC detail:
 

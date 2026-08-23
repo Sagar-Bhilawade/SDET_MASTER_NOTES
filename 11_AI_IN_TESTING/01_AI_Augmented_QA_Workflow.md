@@ -104,7 +104,7 @@ Interview framing:
 
 > "This helps me move from requirement/change to QA coverage faster."
 
-### 2. Automation Framework Agent
+### 2. QA Automation Agent
 
 Purpose: automation drafting and review.
 

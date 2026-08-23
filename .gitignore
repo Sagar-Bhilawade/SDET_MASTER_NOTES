@@ -2,3 +2,7 @@
 # Kept on disk for reading, never committed: copyrighted binaries and repo bloat.
 # These are NOT authored notes. See 09_EXTERNAL_REFS/README.md.
 09_EXTERNAL_REFS/
+
+# Temporary, company-specific interview prep scratchpads.
+# These can duplicate main notes and be deleted after the interview.
+TEMP_INTERVIEW_PREP/

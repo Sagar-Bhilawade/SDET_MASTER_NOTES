@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**84 notes** · Last updated: 2026-08-03
+**117 notes** · Last updated: 2026-08-20
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -24,8 +24,9 @@ foundation  →  tools  →  application  →  practice  →  seniority  →  de
 | **05** | PROCESS_AND_TOOLING | How you work — Agile, Git, Docker, tools |
 | **06** | LEADERSHIP_AND_ARCHITECTURE | Above the tools — decisions and trade-offs |
 | **07** | INTERVIEW_PREP | Packaging it for delivery |
-| **08** | QUICK_REVISION | Revision layer (planned, after learning pass) |
+| **08** | QUICK_REVISION | Revision layer — round-based cheat sheets + living weak-spots file |
 | **09** | EXTERNAL_REFS | Borrowed PDFs — read from, never copy. Gitignored |
+| **10** | PRACTICAL_ROUNDS | Live/practical rounds — coding, SQL, locators, code review, live UI/API, take-home |
 
 **Placement rule:** if the answer changes on a different tool → inside a track folder (02/03).
 If the answer would be identical in a Selenium interview → top level.
@@ -51,6 +52,8 @@ Each cross-references the other two.
 | Process / ways of working | `05_PROCESS_AND_TOOLING` |
 | Manager / senior | `06_LEADERSHIP_AND_ARCHITECTURE` |
 | HR / behavioral | `07_INTERVIEW_PREP` |
+| Live coding / SQL / locators / code review / take-home | `10_PRACTICAL_ROUNDS` |
+| Final revision (any round) | `08_QUICK_REVISION` |
 
 ---
 
@@ -220,24 +223,34 @@ Tool-agnostic. **Theory paired directly with its practice** — read in order.
 
 ---
 
-## 07_INTERVIEW_PREP (3 built, 4 pending)
+## 07_INTERVIEW_PREP (7) ✅
 
 | Folder | Status | Covers |
 |--------|:---:|--------|
-| 01_SELF_INTRO | ❌ Empty | The 60-second opener |
-| 02_PROJECT_STORIES | ❌ Empty | Two-track walkthrough, deeper than behavioral |
-| 03_HR_AND_SALARY | ❌ Empty | CTC negotiation, notice period, why leaving |
-| 04_COMPANY_SPECIFIC | ❌ Empty | Per-company research approach |
+| 01_SELF_INTRO | ✅ | The 60-second opener — present-first, two-track, one metric |
+| 02_PROJECT_STORIES | ✅ | Two-track walkthrough as decisions-with-costs, deeper than behavioral |
+| 03_HR_AND_SALARY | ✅ | CTC negotiation, notice, why leaving, the pivot story, BGV reality |
+| 04_COMPANY_SPECIFIC | ✅ | 30-min research pass, positioning by company type |
 | 05_COMMUNICATION_SKILLS | ✅ | Claim → Reason → Example → Trade-off |
 | 06_DESIGN_QUESTIONS | ✅ | Worked example, 5-step process |
 | 07_BEHAVIORAL_STORIES | ✅ | The six stories, STAR structure |
 
 ---
 
-## 08_QUICK_REVISION — Empty (planned)
+## 08_QUICK_REVISION (7) ✅
 
-Revision layer, deliberately deferred until the learning pass is done.
-Planned as round-based cheat sheets + a living weak-spots file.
+Revision layer — dense, scannable recall sheets for the day of an interview. Learn from
+the full section notes; fire from these.
+
+| # | Note | Covers |
+|---|------|--------|
+| 00 | **Weak Spots** (living file) | Running log of hesitations + post-interview capture; update every session |
+| 01 | Fundamentals Cheat Sheet | Smoke/sanity, severity/priority, ISTQB, design techniques |
+| 02 | Playwright Cheat Sheet | Browser/Context/Page, locators, **where auto-wait stops**, CI 40→12 |
+| 03 | Selenium + Java Cheat Sheet | WebDriver arch, wait mixing, **ThreadLocal remove()**, RestAssured, SQL |
+| 04 | Scenario Round Cheat Sheet | 5 flakiness causes, debug walks, optimization ladder, metrics |
+| 05 | Process & Leadership Cheat Sheet | Agile, Git, Docker/K8s, tool selection, trade-offs |
+| 06 | Behavioral Cheat Sheet | STAR ratio, 6 stories, self-intro, HR/salary triggers |
 
 ---
 
@@ -259,23 +272,75 @@ Read from it, never copy from it. Anything worth keeping gets rewritten into the
 
 ---
 
+## 10_PRACTICAL_ROUNDS — Live / Practical Rounds (22) ✅
+
+Tool-agnostic where possible; both stacks where it matters. The "do it in front of me"
+rounds — the ones you can't bluff. Organized into subfolders per round type.
+
+### 01_CODING_ROUNDS (7)
+| # | Note | Covers |
+|---|------|--------|
+| 01 | Approach & the Meta-Skill | The 5-step method; **test your own solution** out loud |
+| 02 | String Problems | Reverse, palindrome, first-unique, anagram, compression + edge cases |
+| 03 | Array & Collection Problems | Two-sum, dedup, missing number, group-by; brute-force→map |
+| 04 | Counting & HashMap Problems | The count-with-a-map template; the highest-value pattern |
+| 05 | Logic & Number Problems | FizzBuzz, primes (√n), Fibonacci, digit manipulation, overflow |
+| 06 | Java Idioms & Gotchas | `==` vs `.equals()`, Integer cache, streams, map idioms |
+| 07 | TypeScript/JS Idioms & Gotchas | `===`, `??` vs `\|\|`, the forgotten `await`, sort comparator |
+
+### 02_SQL_ROUNDS (5)
+| # | Note | Covers |
+|---|------|--------|
+| 01 | Joins & Filtering | All join types, orphan pattern, `NOT IN`+NULL, WHERE vs HAVING |
+| 02 | Aggregation & Grouping | `COUNT(*)` vs `COUNT(col)`, execution order, conditional aggregation |
+| 03 | Window Functions | **The senior differentiator** — ROW_NUMBER/RANK/DENSE_RANK, top-N-per-group |
+| 04 | SDET Validation Patterns | Persistence checks, integrity, reconciliation, JDBC, cross-table |
+| 05 | Problem Bank & Gotchas | Rapid-fire prompts + the complete gotcha table |
+
+### 03_CODE_REVIEW (1)
+| # | Note | Covers |
+|---|------|--------|
+| 01 | Code Review Exercise | Worked flawed examples; correctness > flakiness > style |
+
+### 04_LIVE_UI_TESTING (1)
+| # | Note | Covers |
+|---|------|--------|
+| 01 | Live UI Test Writing | Design cases out loud first, then clean code; test-level trade-off |
+
+### 05_LIVE_API_TESTING (1)
+| # | Note | Covers |
+|---|------|--------|
+| 01 | Live API Testing | Status+body+schema+negatives; CRUD lifecycle; 401 vs 403 |
+
+### 06_TAKE_HOME (1)
+| # | Note | Covers |
+|---|------|--------|
+| 01 | Take-Home Assignment | Scope tight, build well; README is half the grade |
+
+### 07_LOCATORS_MASTERY (6)
+The in-depth locator guide — CSS, XPath, and finding elements in practice. Interview-tested.
+
+| # | Note | Covers |
+|---|------|--------|
+| 01 | Locator Strategy | Priority hierarchy, good vs bad locators, `data-testid`, CSS vs XPath |
+| 02 | CSS Selectors — Complete | Attribute operators, combinators, pseudo-classes, `:has()`, limits |
+| 03 | XPath — Complete | Axes, functions, `text()` vs `.`, **the table-row XPath**, predicates |
+| 04 | Playwright Locators | `getByRole`, filter/chaining, strictness, lazy = no stale elements |
+| 05 | Selenium Locators | 8 `By` strategies, findElement vs findElements, **stale-element problem** |
+| 06 | Finding & Debugging Locators | DevTools workflow, dynamic IDs, iframes, shadow DOM, tables |
+
+---
+
 ## What's NOT Built Yet
 
 | Gap | Priority | Notes needed |
 |-----|:---:|:---:|
-| **Practical / live rounds** | 🔴 High | ~6-8 |
-| ├ Coding problems (Java + JS/TS) | | problem bank |
-| ├ SQL query practice | | problem bank |
-| ├ Code review exercise | | worked examples |
-| ├ Live UI test writing | | approach + examples |
-| ├ Live API testing | | approach |
-| └ Take-home assignment | | scoping guide |
-| **Interview prep gaps** | 🟡 Medium | 4 |
-| └ Self-intro, project stories, HR/salary, company-specific | | |
-| **Revision layer** (`08_QUICK_REVISION`) | 🟡 Medium | ~7 |
-| └ After the learning pass | | |
 | **Gauge, Python** | ⚪ Deferred | — |
 | └ On the resume; Sagar's call to revisit later | | |
+
+> Learning arc, interview-prep, practical rounds, and the revision layer are all built.
+> Remaining work is maintenance: keep `08_QUICK_REVISION/00_Weak_Spots.md` current after
+> every session and interview, and add notes for any real-interview question the arc misses.
 
 ---
 

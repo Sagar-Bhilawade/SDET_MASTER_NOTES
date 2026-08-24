@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**118 notes** · Last updated: 2026-08-23
+**124 notes** · Last updated: 2026-08-24
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -333,25 +333,23 @@ The in-depth locator guide — CSS, XPath, and finding elements in practice. Int
 
 ---
 
-## 11_AI_IN_TESTING (1) 🟡
+## 11_AI_IN_TESTING (7) ✅
 
-Expanding section for AI-assisted QA workflows. This is separate from Playwright tooling
-because interviewers increasingly ask about AI across the whole testing lifecycle: Jira,
-PR review, test design, regression selection, automation candidates, script drafting, and
-bug reporting.
+AI-assisted QA workflows across the whole testing lifecycle. Separate from Playwright
+tooling because interviewers increasingly ask about AI end-to-end: Jira, PR review, test
+design, regression selection, automation candidates, script drafting, and bug reporting.
+Framing throughout is honest and bounded — AI drafts fast; QA judgment owns risk,
+assertions, coverage, and release confidence.
 
 | # | Note | Covers |
 |---|------|--------|
-| 01 | AI-Augmented QA Workflow | QA Knowledge Agent, QA Automation Agent, PR/Jira analysis, test-plan/case drafting, automation conversion, review gates |
-
-Planned additions after real interview/office-PC detail:
-
-- PR and Jira Story Analysis
-- AI-Assisted Test Plan And Functional Case Generation
-- Regression Case Selection And Coverage Tracking
-- Manual Flow To Playwright Automation Drafts
-- AI-Assisted Bug Drafting And Defect Quality
-- Review Gates For AI-Generated Tests
+| 01 | AI-Augmented QA Workflow | Two-agent model (Knowledge + Automation), where AI helps, what not to claim |
+| 02 | PR And Jira Story Analysis | Story = intended behavior, PR = actual change; **test the gap**; blast radius |
+| 03 | Test Plan And Case Generation | AI gives breadth, you supply depth+priority; **good QA is deletion** |
+| 04 | Regression Selection And Coverage Tracking | Risk-based selection, coverage map, **not real code coverage** |
+| 05 | Manual Flow To Playwright Drafts | Draft→harden; locators, waits, **visibility-only assertions**; green-but-wrong |
+| 06 | Bug Drafting And Defect Quality | AI formats, you own facts; never invent repro; severity is yours |
+| 07 | Review Gates For AI-Generated Tests | The 6-question gate; **"why does this exist?"**; fast green suite that proves nothing |
 
 ---
 

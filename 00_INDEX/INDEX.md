@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**124 notes** · Last updated: 2026-08-24
+**125 notes** · Last updated: 2026-08-24
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -239,7 +239,7 @@ Tool-agnostic. **Theory paired directly with its practice** — read in order.
 
 ---
 
-## 08_QUICK_REVISION (7) ✅
+## 08_QUICK_REVISION (8) ✅
 
 Revision layer — dense, scannable recall sheets for the day of an interview. Learn from
 the full section notes; fire from these.
@@ -253,6 +253,7 @@ the full section notes; fire from these.
 | 04 | Scenario Round Cheat Sheet | 5 flakiness causes, debug walks, optimization ladder, metrics |
 | 05 | Process & Leadership Cheat Sheet | Agile, Git, Docker/K8s, tool selection, trade-offs |
 | 06 | Behavioral Cheat Sheet | STAR ratio, 6 stories, self-intro, HR/salary triggers |
+| 07 | AI In Testing Cheat Sheet | Two-agent model, story-vs-PR gap, **deletion is the work**, review gate, red lines |
 
 ---
 

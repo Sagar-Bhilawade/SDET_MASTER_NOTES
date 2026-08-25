@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**125 notes** · Last updated: 2026-08-24
+**128 notes** · Last updated: 2026-08-25
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -77,7 +77,7 @@ answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
 
 ---
 
-## 02_PLAYWRIGHT — Track 1 (31) ✅
+## 02_PLAYWRIGHT — Track 1 (33) ✅
 
 ### 01_BASICS (8)
 | # | Note | Covers |
@@ -106,12 +106,14 @@ answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
 | 10 | Test Runner Features | test.step, tags, annotations, soft assertions |
 | 11 | Visual Testing | Screenshot comparison, baseline environment problem |
 
-### 03_API_TESTING (3)
+### 03_API_TESTING (5)
 | # | Note | Covers |
 |---|------|--------|
 | 01 | APIRequestContext | Built-in client, **request vs page.request** |
 | 02 | HTTP Methods | REST semantics, idempotency, status codes |
 | 03 | Response Validation | toMatchObject over toEqual, schema validation |
+| 04 | API Non-Functional Testing | Response time, auth/security, error quality, schema stability, invalid type handling |
+| 05 | API Auth Token Management | Bearer token fixture, expiry refresh, `request` vs `page.request`, storage-state boundary |
 
 ### 04_TYPESCRIPT (4)
 | # | Note | Covers |
@@ -334,7 +336,7 @@ The in-depth locator guide — CSS, XPath, and finding elements in practice. Int
 
 ---
 
-## 11_AI_IN_TESTING (7) ✅
+## 11_AI_IN_TESTING (8) ✅
 
 AI-assisted QA workflows across the whole testing lifecycle. Separate from Playwright
 tooling because interviewers increasingly ask about AI end-to-end: Jira, PR review, test
@@ -351,6 +353,7 @@ assertions, coverage, and release confidence.
 | 05 | Manual Flow To Playwright Drafts | Draft→harden; locators, waits, **visibility-only assertions**; green-but-wrong |
 | 06 | Bug Drafting And Defect Quality | AI formats, you own facts; never invent repro; severity is yours |
 | 07 | Review Gates For AI-Generated Tests | The 6-question gate; **"why does this exist?"**; fast green suite that proves nothing |
+| 08 | Context Management For QA Agents | Skills vs task context, agent handoff, scoped context, avoiding generic output |
 
 ---
 

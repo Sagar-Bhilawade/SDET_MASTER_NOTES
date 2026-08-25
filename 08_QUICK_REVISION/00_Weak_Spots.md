@@ -29,6 +29,11 @@ readiness bar in the skill flags as make-or-break, so they're the default starti
 | The forgotten `await` | The #1 TS automation bug — catch it in code review on sight | `02/04/04` |
 | Flaky fix ≠ retries | Why raising retry count hides the bug instead of fixing it | `04/01` |
 | Test level trade-off | "200ms API vs 10s UI" — when NOT to test through the UI | `10/04` |
+| Dropdown exact methods | Native select: `selectOption({ label/value/index })`; custom dropdown: click trigger + option | `02/01/04` |
+| Playwright strict-mode wording | Say `strict mode violation ... resolved to 2 elements`; fix by scoping, not blind `.first()` | `10/07/04` |
+| API non-functional checks | Response time, security/auth, error quality, schema stability, sensitive data leakage | `02/03/04` |
+| API token management | UI storage state vs API bearer token context; expiry handling and refresh | `02/03/05` |
+| Agent context management | Skills = stable rules, task context = current story/PR/files, reviewed handoff between agents | `11/08` |
 
 ---
 

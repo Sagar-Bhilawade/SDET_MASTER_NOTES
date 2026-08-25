@@ -12,6 +12,7 @@ Use it for:
 - automation coverage tracking
 - bug drafting and defect-quality improvement
 - agent/skill workflows that support QA work
+- context management between skills, task-specific files, and agent handoffs
 
 Keep the framing honest:
 

@@ -85,6 +85,45 @@ Understanding actions deeply = understanding why your tests are stable.
 >
 > Way better than manually clicking dropdown + option.
 >
+> The exact methods interviewers expect:
+>
+> ```typescript
+> // Select by visible label
+> await page.getByLabel('Country').selectOption({ label: 'India' });
+>
+> // Select by value attribute
+> await page.getByLabel('Country').selectOption({ value: 'IN' });
+>
+> // Select by index - first option is index 0
+> await page.getByLabel('Country').selectOption({ index: 0 });
+>
+> // Short form also works for value/label-style simple cases
+> await page.getByLabel('Country').selectOption('India');
+> ```
+>
+> For a real HTML `<select>`, use `selectOption()`. If the dropdown is a custom React
+> component made from divs/spans, `selectOption()` will not work because there is no real
+> `<select>` element. Then the strategy is:
+>
+> ```typescript
+> await page.getByRole('combobox', { name: 'Country' }).click();
+> await page.getByRole('option').first().click();
+> ```
+>
+> Or better, choose the option by name:
+>
+> ```typescript
+> await page.getByRole('combobox', { name: 'Country' }).click();
+> await page.getByRole('option', { name: 'India' }).click();
+> ```
+>
+> The strong interview line:
+>
+> "For a native select dropdown I use `selectOption()` by label, value, or index. For a
+> custom dropdown, I click the combobox/listbox trigger and then select the option with
+> `getByRole('option')`, preferably by name. I avoid index unless the first item is truly
+> the requirement."
+>
 > **4. CHECK/UNCHECK (Checkboxes)**
 > ```
 > await page.getByTestId('agree-terms').check();
@@ -232,7 +271,7 @@ wait.until(ExpectedConditions.presenceOfElementLocated(By.id("dashboard")));
 - **Playwright:** 7 lines, all auto-waits, stable
 - **Selenium:** 15+ lines, manual waits, flaky
 
-This is why Playwright cut our flakiness from 15% to 2%.
+This is why Playwright helped reduce timing-related flakiness in our suite.
 
 ---
 
@@ -265,9 +304,10 @@ This is why Playwright cut our flakiness from 15% to 2%.
 ✅ Why high-level actions are better than low-level  
 ✅ How auto-waiting works (and why it eliminates flakiness)  
 ✅ Difference between `fill()` and `type()`  
-✅ Why action order matters (click dropdown before selecting option)  
+✅ Native dropdown: `selectOption({ label })`, `{ value }`, `{ index }`  
+✅ Custom dropdown: click trigger, then `getByRole('option', { name })`  
 ✅ How actions trigger events (change, submit, etc.)  
-✅ Your stability improvements at NielsenIQ (15% → 2% flakiness)  
+✅ Your stability improvements at NielsenIQ without inventing unverified numbers  
 
 ---
 

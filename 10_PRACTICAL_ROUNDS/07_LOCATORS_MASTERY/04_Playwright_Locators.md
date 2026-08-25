@@ -85,6 +85,44 @@ await page.getByRole('button').click();  // THROWS if >1 button matches
 ```
 Playwright locators are **strict by default**: if a locator resolves to multiple elements and you act on it, it *errors* rather than silently acting on the first. This is a feature — it catches ambiguous locators at test time instead of producing flaky "acted on the wrong element" bugs. To act on one of many, be explicit: `.first()`, `.nth()`, or narrow the locator. Explaining strictness is a strong signal of real Playwright understanding.
 
+The wording to remember:
+
+```text
+Error: strict mode violation: locator('...') resolved to 2 elements
+```
+
+You may also see it attached to the action:
+
+```text
+locator.click: Error: strict mode violation: getByRole('button', { name: 'Edit' }) resolved to 2 elements
+```
+
+What it means:
+
+> "Playwright found more than one matching element, and because actions require a unique
+> target, it refused to guess."
+
+How to fix:
+
+```typescript
+// Better: narrow to the row/card/dialog first
+const row = page.getByRole('row').filter({ hasText: 'sagar@test.com' });
+await row.getByRole('button', { name: 'Edit' }).click();
+
+// Acceptable only when first item is truly the requirement
+await page.getByRole('button', { name: 'Edit' }).first().click();
+
+// Acceptable only when position is stable by requirement
+await page.getByRole('button', { name: 'Edit' }).nth(1).click();
+```
+
+Interview answer:
+
+> "The error is a strict mode violation. Playwright resolved the locator to multiple
+> elements and refused to click because the target was ambiguous. My first fix is not
+> `.first()` blindly; I scope to the correct parent row, card, modal, or section and then
+> locate the child action."
+
 ---
 
 ## Locators are lazy (and why that matters)
@@ -121,7 +159,7 @@ It locates by what the element is to a user (resilient to restyling), doubles as
 `getByRole('row').filter({ hasText: 'X' }).getByRole('button', {...})` — chaining and filter, no XPath needed.
 
 **Q: "What happens if your locator matches two elements?"**
-Strict mode throws on action — a feature. I'd narrow it with filter or, if items are truly identical, use `.nth()`.
+Strict mode throws on action with wording like `strict mode violation ... resolved to 2 elements`. That's a feature. I'd narrow it with filter or a parent container first; if items are truly identical by requirement, then `.first()` or `.nth()` is acceptable.
 
 **Q: "Why no stale-element exceptions in Playwright?"**
 Locators are lazy — they re-resolve on every action instead of holding a reference, so a re-rendered DOM isn't stale. Selenium's `WebElement` holds a reference, which goes stale.

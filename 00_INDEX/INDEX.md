@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**129 notes** · Last updated: 2026-08-25
+**131 notes** · Last updated: 2026-08-25
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -77,7 +77,7 @@ answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
 
 ---
 
-## 02_PLAYWRIGHT — Track 1 (34) ✅
+## 02_PLAYWRIGHT — Track 1 (36) ✅
 
 ### 01_BASICS (9)
 | # | Note | Covers |
@@ -92,7 +92,7 @@ answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
 | 08 | Handling Complex UI | iframes, dialogs, tabs, uploads, downloads, shadow DOM |
 | 09 | Error Messages And Exceptions | strict mode, timeout, actionability, closed context, auth/setup errors |
 
-### 02_FRAMEWORK (11)
+### 02_FRAMEWORK (12)
 | # | Note | Covers |
 |---|------|--------|
 | 01 | Framework Design | Architecture as decisions, separation of concerns |
@@ -106,6 +106,7 @@ answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
 | 09 | Parallel Execution | Workers, sharding, isolation requirements |
 | 10 | Test Runner Features | test.step, tags, annotations, soft assertions |
 | 11 | Visual Testing | Screenshot comparison, baseline environment problem |
+| 12 | Fixtures, Hooks, And Auth Setup Practical | `base.extend`, `use()`, scopes, storage state, API token fixture |
 
 ### 03_API_TESTING (5)
 | # | Note | Covers |
@@ -124,7 +125,7 @@ answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
 | 03 | Generics | Typed API client, constraints, `as T` isn't validation |
 | 04 | Async/Await | **The forgotten `await`**, no-floating-promises |
 
-### 05_CICD_AND_EXECUTION (5)
+### 05_CICD_AND_EXECUTION (6)
 | # | Note | Covers |
 |---|------|--------|
 | 01 | GitHub Actions | Workflow, caching, sharding, `if: always()` |
@@ -132,6 +133,7 @@ answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
 | 03 | Docker & Environments | Image/version matching, env config, fail-fast |
 | 04 | Reporting & Artifacts | Reporters per audience, trace-on-first-retry |
 | 05 | Tooling & AI Productivity | Codegen, UI mode, honest AI positioning |
+| 06 | Project Setup, Commands, And Scripts | `npm init playwright@latest`, execution commands, `package.json`, `npm ci` |
 
 ---
 

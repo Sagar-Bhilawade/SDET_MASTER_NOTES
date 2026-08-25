@@ -4,7 +4,7 @@
 
 Fixtures are functions that run before tests to set up conditions, and after tests to tear down. They're like beforeEach/afterEach hooks, but better:
 - Reusable across multiple tests
-- Scoped (test-level, worker-level, project-level)
+- Scoped (test-level and worker-level)
 - Automatic cleanup
 - Parameterizable
 - Lazy (only run when used)
@@ -144,50 +144,37 @@ Fixtures are the Playwright way. Hooks are the old way.
 >     await use(user);
 >     // Cleanup after test
 >   },
->   scope: 'test'  // Default
+>   // test scope is the default
 > });
 >
 > // Worker scope (runs once per test worker)
-> export const database = base.extend({
->   db: async ({}, use) => {
+> export const testWithDatabase = base.extend({
+>   db: [async ({}, use) => {
 >     const db = await connectDatabase();
 >     await use(db);
 >     // Cleanup after all tests in worker
->   },
->   scope: 'worker'
+>   }, { scope: 'worker' }]
 > });
 >
-> // Project scope (runs once for entire run)
-> export const server = base.extend({
->   server: async ({}, use) => {
->     const server = await startTestServer();
->     await use(server);
->     // Cleanup after all tests
->   },
->   scope: 'project'
-> });
+> // Note: Playwright fixtures are mainly test-scoped or worker-scoped.
+> // Project-level orchestration is usually done through projects/dependencies in config,
+> // not a "project-scoped fixture".
 > ```
 >
-> **4. PARAMETERIZED FIXTURES**
+> **4. PARAMETERIZED TESTS USING FIXTURE DATA**
 >
 > ```typescript
-> // Run same test with different users
-> export const userFixture = base.extend({
->   user: async ({ }, use, testInfo) => {
->     const users = {
->       admin: { email: 'admin@example.com', role: 'admin' },
->       user: { email: 'user@example.com', role: 'user' },
->     };
+> const users = [
+>   { email: 'admin@example.com', role: 'admin' },
+>   { email: 'user@example.com', role: 'user' },
+> ];
 >
->     await use(users.admin);  // First run
->     await use(users.user);   // Second run
->   },
-> });
->
-> test('User can access dashboard', async ({ user, page }) => {
->   await login(page, user.email);
->   await expect(page.getByText(`Welcome, ${user.role}`)).toBeVisible();
-> });
+> for (const user of users) {
+>   test(`User can access dashboard as ${user.role}`, async ({ page }) => {
+>     await login(page, user.email);
+>     await expect(page.getByText(`Welcome, ${user.role}`)).toBeVisible();
+>   });
+> }
 >
 > // Test runs twice: once with admin, once with user
 > ```
@@ -241,7 +228,7 @@ Fixtures are the Playwright way. Hooks are the old way.
 |------|-------|------|------------|
 | **Test Fixture** | test | Before each test | Setup unique to one test (fresh user) |
 | **Worker Fixture** | worker | Once per worker | Expensive setup shared by tests (database) |
-| **Project Fixture** | project | Once for all | Very expensive setup (test server) |
+| **Project dependency** | config project | Before dependent projects | Auth setup, global orchestration |
 
 ---
 
@@ -316,7 +303,7 @@ test('User edits preferences', async ({ loginPage, page }) => {
 
 ### Q5: "How do you test multiple users with one test?"
 
-**A:** "Parameterized fixtures. Define the fixture to run multiple times with different data. Test runs once per parameter set."
+**A:** "Use data-driven tests or project-level storage states. For example, loop through admin/user data and create one test per role, or use separate `.auth/admin.json` and `.auth/user.json` storage states. I would not describe this as one fixture magically running twice; the test definition or project config controls the variations."
 
 ---
 
@@ -324,9 +311,9 @@ test('User edits preferences', async ({ loginPage, page }) => {
 
 ✅ Why fixtures are better than beforeEach hooks  
 ✅ How fixtures are reusable across tests  
-✅ Fixture scopes (test, worker, project)  
+✅ Fixture scopes (test and worker), plus project dependencies in config
 ✅ Automatic cleanup  
-✅ Parameterized fixtures  
+✅ Data-driven tests and role-based storage states
 ✅ Your fixture strategy at NielsenIQ  
 
 ---

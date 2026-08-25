@@ -35,6 +35,8 @@ readiness bar in the skill flags as make-or-break, so they're the default starti
 | API token management | UI storage state vs API bearer token context; expiry handling and refresh | `02/03/05` |
 | Agent context management | Skills = stable rules, task context = current story/PR/files, reviewed handoff between agents | `11/08` |
 | Playwright error classification | strict mode vs timeout vs actionability vs closed context vs auth/setup failures | `02/01/09` |
+| Fixtures/hooks/auth setup | Explain `base.extend`, `await use()`, test vs worker scope, hooks vs fixtures, UI storage vs API token | `02/02/12` |
+| Playwright commands/scripts | Create project, run/debug/filter tests, show report/trace, explain `package.json` and `package-lock.json` | `02/05/06` |
 
 ---
 

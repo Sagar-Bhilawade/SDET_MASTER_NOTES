@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**131 notes** · Last updated: 2026-08-25
+**132 notes** · Last updated: 2026-08-25
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -339,7 +339,7 @@ The in-depth locator guide — CSS, XPath, and finding elements in practice. Int
 
 ---
 
-## 11_AI_IN_TESTING (8) ✅
+## 11_AI_IN_TESTING (9) ✅
 
 AI-assisted QA workflows across the whole testing lifecycle. Separate from Playwright
 tooling because interviewers increasingly ask about AI end-to-end: Jira, PR review, test
@@ -357,6 +357,7 @@ assertions, coverage, and release confidence.
 | 06 | Bug Drafting And Defect Quality | AI formats, you own facts; never invent repro; severity is yours |
 | 07 | Review Gates For AI-Generated Tests | The 6-question gate; **"why does this exist?"**; fast green suite that proves nothing |
 | 08 | Context Management For QA Agents | Skills vs task context, agent handoff, scoped context, avoiding generic output |
+| 09 | Playwright CLI Agent Browser Exploration | CLI vs MCP, snapshots, refs, `find`, `generate-locator`, console/network commands |
 
 ---
 

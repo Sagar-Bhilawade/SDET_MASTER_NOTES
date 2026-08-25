@@ -37,6 +37,7 @@ readiness bar in the skill flags as make-or-break, so they're the default starti
 | Playwright error classification | strict mode vs timeout vs actionability vs closed context vs auth/setup failures | `02/01/09` |
 | Fixtures/hooks/auth setup | Explain `base.extend`, `await use()`, test vs worker scope, hooks vs fixtures, UI storage vs API token | `02/02/12` |
 | Playwright commands/scripts | Create project, run/debug/filter tests, show report/trace, explain `package.json` and `package-lock.json` | `02/05/06` |
+| Playwright CLI agent commands | Explain CLI vs MCP, `snapshot`, refs, `find`, `click/fill`, `generate-locator`, `console`, `requests` | `11/09` |
 
 ---
 

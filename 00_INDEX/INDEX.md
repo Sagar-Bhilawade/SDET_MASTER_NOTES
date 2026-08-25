@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**128 notes** · Last updated: 2026-08-25
+**129 notes** · Last updated: 2026-08-25
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -77,9 +77,9 @@ answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
 
 ---
 
-## 02_PLAYWRIGHT — Track 1 (33) ✅
+## 02_PLAYWRIGHT — Track 1 (34) ✅
 
-### 01_BASICS (8)
+### 01_BASICS (9)
 | # | Note | Covers |
 |---|------|--------|
 | 01 | What Is Playwright | Why Playwright, vs Selenium, architecture contrast |
@@ -90,6 +90,7 @@ answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
 | 06 | Debugging | Trace viewer, video, inspector, replaying CI failures |
 | 07 | **Waiting Strategies** | 5 actionability checks, **where auto-waiting stops** |
 | 08 | Handling Complex UI | iframes, dialogs, tabs, uploads, downloads, shadow DOM |
+| 09 | Error Messages And Exceptions | strict mode, timeout, actionability, closed context, auth/setup errors |
 
 ### 02_FRAMEWORK (11)
 | # | Note | Covers |

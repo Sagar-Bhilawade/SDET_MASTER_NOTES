@@ -34,6 +34,7 @@ readiness bar in the skill flags as make-or-break, so they're the default starti
 | API non-functional checks | Response time, security/auth, error quality, schema stability, sensitive data leakage | `02/03/04` |
 | API token management | UI storage state vs API bearer token context; expiry handling and refresh | `02/03/05` |
 | Agent context management | Skills = stable rules, task context = current story/PR/files, reviewed handoff between agents | `11/08` |
+| Playwright error classification | strict mode vs timeout vs actionability vs closed context vs auth/setup failures | `02/01/09` |
 
 ---
 

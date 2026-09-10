@@ -16,13 +16,13 @@ Everything should ladder up to one coherent arc. Yours is genuinely strong becau
 Selenium, Java, RestAssured, SQL, Jenkins. Heavy backend API validation, database testing, legacy UI. Roughly two years.
 
 **Track 1 (Jan 2025 – present): Modern automation**
-Playwright, TypeScript, Azure DevOps, GitHub Actions. UI plus API in one framework, cloud-native environment, framework design ownership.
+Playwright, TypeScript, Azure DevOps, GitHub Actions. UI E2E automation with API-assisted setup/cleanup, cloud environment exposure, framework design ownership.
 
 **Why this arc works:** it's not "I learned a new tool." It's *"I've built automation in two very different paradigms and I understand why each fits its context."* That's exactly the perspective that justifies a senior title — and it's why you can credibly say a Java team with a working Selenium grid shouldn't migrate. You've worked in both.
 
 **How to say it in 30 seconds:**
 
-> "I've spent about three and a half years in test automation across two quite different stacks. The first two years were enterprise legacy — Selenium with Java, heavy API validation with RestAssured, database testing, Jenkins pipelines. Since the start of last year I've been on modern cloud-native automation: Playwright with TypeScript, UI and API in one framework, running through Azure DevOps. Having built in both means I've seen where each approach actually fits, which shapes how I make tooling decisions now."
+> "I've spent 3.8+ years across manual and automation testing in two quite different stacks. The first two years were enterprise legacy — Selenium with Java, API validation with RestAssured, database testing, Jenkins pipelines. Since the start of 2025 I've been on modern Playwright with TypeScript: UI E2E automation with API-assisted setup/cleanup and CI execution through Azure DevOps/GitHub Actions. Having built in both means I've seen where each approach actually fits, which shapes how I make tooling decisions now."
 
 ---
 

@@ -12,7 +12,7 @@
 > what risk matters, what assertion proves the behavior, what to automate, and what
 > needs exploratory/manual validation."*
 
-Resume title backs it: **AI-Augmented QA Automation Engineer.** Metric: **30% efficiency
+Resume title backs it: **AI-Assisted QA.** Metric: **30% efficiency
 gain** on BASES_PLAYWRIGHT — always quoted *with* the review, never instead of it.
 
 ---

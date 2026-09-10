@@ -16,7 +16,7 @@ The rule: **professional only, present-first, ending on why this role.** Nothing
 
 ## 30-second answer (the core)
 
-> "I'm an SDET with about three and a half years at NielsenIQ, working across two automation stacks. For the last year and a half I've owned framework design on a modern Playwright and TypeScript project — UI and API in one framework, running through Azure DevOps on Kubernetes. Before that I spent two years on an enterprise Selenium and Java stack with heavy API and database validation. I'm ISTQB and Azure certified. I'm looking for a senior SDET role where I own more of the automation strategy, not just the implementation."
+> "I'm an SDET with 3.8+ years at NielsenIQ across manual and automation testing. My current track is Playwright with TypeScript, where I work on UI E2E automation with API-assisted setup and cleanup, reusable fixtures, CI execution, and AI-assisted QA workflows. Before that I spent around two years on an enterprise Selenium and Java stack with RestAssured API validation, SQL checks, and Jenkins pipelines. I'm ISTQB CTFL and Azure AZ-900 certified, and I'm looking for an SDET role where I can own more of the automation strategy and quality engineering approach."
 
 That's it. Memorize the shape, not the words.
 
@@ -26,11 +26,11 @@ That's it. Memorize the shape, not the words.
 
 Same spine, with one metric and one signature story hook added:
 
-> "I'm an SDET with around three and a half years at NielsenIQ. My work splits into two tracks. The current one — since the start of last year — is a modern Playwright and TypeScript framework where I own the design: UI plus API in one place, running in parallel through Azure DevOps on a Kubernetes environment. The headline result there was cutting the CI feedback loop from about 40 minutes down to 12, mostly through sharding and killing wasted waits.
+> "I'm an SDET with 3.8+ years at NielsenIQ across manual and automation testing. My work splits into two tracks. The current one — since the start of 2025 — is a modern Playwright and TypeScript framework where I work on UI E2E automation, API-assisted test data setup and cleanup, reusable fixtures, and CI-ready execution. The headline result there was cutting the CI feedback loop from about 40 minutes down to 12, mostly through better parallel execution and removing wasted waits.
 >
 > Before that, my first two years were an enterprise Selenium and Java stack — 300-plus automated scenarios, RestAssured for the API layer, SQL for database validation, Jenkins pipelines. That's where I did the hard flakiness work and got the suite under 2% flaky on first attempt.
 >
-> I'm ISTQB and Azure AZ-900 certified, and I use AI-assisted workflows — mostly Playwright's CLI and Copilot — practically, for scaffolding and maintenance, which has been about a 30% efficiency gain.
+> I'm ISTQB CTFL and Azure AZ-900 certified, and I use AI-assisted workflows — GitHub Copilot Chat and Playwright CLI workflows — practically, for test drafting, locator refinement, and maintenance, which has been about a 30% efficiency gain.
 >
 > Having built in both a legacy and a modern paradigm is really what shapes how I make tooling decisions now. What I'm after next is a role with more ownership on the architecture and strategy side."
 
@@ -40,7 +40,7 @@ Same spine, with one metric and one signature story hook added:
 
 | Piece | Why it's in the opener |
 |-------|------------------------|
-| "three and a half years" | Establishes seniority band up front |
+| "3.8+ years" | Establishes seniority band up front |
 | Playwright **first** | Leads with the in-demand skill; mirrors most JDs |
 | "own framework design" | Signals you're not just a test-writer — the 20 LPA line |
 | One metric (40→12 or <2%) | Concrete, memorable, verifiable against the resume |
@@ -54,7 +54,7 @@ Same spine, with one metric and one signature story hook added:
 
 The opener *is* the project example in compressed form. The two anchors:
 
-- **BASES_PLAYWRIGHT (Track 1):** Playwright, TypeScript, Azure DevOps, Kubernetes, GitHub Copilot — framework ownership, 40→12 min CI.
+- **BASES_PLAYWRIGHT (Track 1):** Playwright, TypeScript, GitHub Copilot Chat, Playwright CLI workflows, Azure DevOps, GitHub Actions — UI E2E framework with API-assisted setup/cleanup, 40→12 min CI.
 - **CIP_LEGACY (Track 2):** Selenium, Java, RestAssured, TestNG, Maven, SQL, Jenkins — 300+ scenarios, under 2% flaky.
 
 If they want to go deeper on either, that's the [project stories](../02_PROJECT_STORIES/02_Project_Stories.md) note.

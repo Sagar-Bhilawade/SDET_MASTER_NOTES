@@ -21,10 +21,11 @@ Two rules: **separate "I" vs "we"** (they can't credit what they can't attribute
 
 ## The self-intro (30 sec, memorize the shape)
 
-> "SDET, ~3.5 years at NielsenIQ, two stacks. Last 1.5 years: own framework design on a
-> modern Playwright + TypeScript project, UI+API, Azure DevOps. Before: two years enterprise
-> Selenium + Java, heavy API and DB validation. ISTQB and Azure certified. Looking for a
-> senior SDET role with more ownership of the automation strategy."
+> "SDET, 3.8+ years at NielsenIQ across manual and automation testing. Current track:
+> Playwright + TypeScript UI E2E automation with API-assisted setup/cleanup, fixtures,
+> AI-assisted QA workflows, and CI execution. Earlier: Selenium + Java with RestAssured,
+> SQL validation, and Jenkins. ISTQB CTFL and Azure AZ-900 certified. Looking for an SDET
+> role with more ownership of automation strategy and quality engineering."
 
 Present-first. Playwright leads. One metric. End on why. **Never** narrate from college. See `07/01`.
 

@@ -36,7 +36,7 @@ Calm, no apology, anchored on scope. Then **stop talking.** The silence after a 
 
 Answer honestly, then reframe fast:
 
-> "My current fixed is 13.1. I'll be candid that it's below market for three and a half years of SDET work with framework ownership across two stacks — which is part of why I'm looking. What I'm focused on is the value for this role, and that's the 20-24 range."
+> "My current fixed is 13.1. I'll be candid that it's below market for 3.8+ years of SDET work across manual and automation testing with framework ownership across two stacks — which is part of why I'm looking. What I'm focused on is the value for this role, and that's the 20-24 range."
 
 Honesty on the number + immediate pivot to market rate. You're not hiding 13.1 — you're framing it as *the reason you're worth more elsewhere*, which is true.
 

@@ -18,25 +18,25 @@ Behavioral rounds test *how you operate*. Project deep-dives test *whether you a
 
 ### 30-second frame
 
-> "The current project is a modern automation framework in Playwright and TypeScript, covering both UI and API for a data-heavy analytics product. I own the framework design — fixtures, config, CI integration — and it runs in parallel through Azure DevOps on a Kubernetes environment. The result I'm proudest of is taking the CI feedback loop from about 40 minutes to 12."
+> "The current project is a modern Playwright and TypeScript UI E2E automation framework for a data-heavy analytics product. I use API-assisted setup and cleanup for test data, with reusable fixtures, config, and CI integration through Azure DevOps/GitHub Actions. The result I'm proudest of is taking the CI feedback loop from about 40 minutes to 12."
 
 ### 2-minute walkthrough
 
-**The context:** a Playwright + TypeScript suite for a BASES analytics product. UI flows plus the API layer behind them, in one framework so the same test data seeds through the API and gets verified in the UI.
+**The context:** a Playwright + TypeScript suite for a BASES analytics product. The main scope is UI E2E automation, with Playwright request/API capabilities used for setup, cleanup, and test data control so the UI tests start from a reliable state.
 
-**What I own:** the framework architecture — the fixture layer, `playwright.config.ts`, the Page Object structure, and the CI pipeline in Azure DevOps.
+**What I own:** the framework architecture — the fixture layer, API-assisted setup/cleanup, `playwright.config.ts`, the Page Object structure, and CI execution in Azure DevOps/GitHub Actions.
 
 **The design decisions that matter:**
 - **Fixtures over raw hooks** for setup, because they compose and evaluate lazily — a test only pays for the fixtures it actually uses. Cost: a steeper learning curve for someone new to Playwright.
 - **Storage-state auth** so tests don't log in through the UI every run. Cost: it creates a coverage gap — the login flow itself is no longer exercised by most tests, so I keep one dedicated UI login test to cover it.
 - **Sharding across workers** in CI, which is most of the 40→12 win, plus removing wasted `waitForTimeout` calls in favour of web-first assertions.
 
-**AI angle, honestly framed:** I use Playwright's codegen and Copilot to scaffold and maintain tests — roughly a 30% efficiency gain on the boilerplate. Not self-healing selectors, not an agent architecture. Practical CLI-driven workflows.
+**AI angle, honestly framed:** I use GitHub Copilot Chat and Playwright CLI workflows to draft and maintain tests — roughly a 30% efficiency gain on boilerplate and maintenance support. Not self-healing selectors, not Playwright MCP as a resume skill, not an agent architecture.
 
 ### If they go deeper
 
 - **"How do you keep it non-flaky in parallel?"** → Every test owns its data through a fixture; no shared mutable state; web-first assertions instead of sleeps. See [Waiting Strategies](../../02_PLAYWRIGHT/01_BASICS/07_Waiting_Strategies.md).
-- **"Why Playwright over Cypress here?"** → Multi-tab/context support, true parallelism, and one framework for UI + API. See [Tool Selection](../../06_LEADERSHIP_AND_ARCHITECTURE/01_Tool_Selection_Framework.md).
+- **"Why Playwright over Cypress here?"** → Multi-tab/context support, strong auto-waiting, parallel execution, and built-in request context for setup/cleanup. See [Tool Selection](../../06_LEADERSHIP_AND_ARCHITECTURE/01_Tool_Selection_Framework.md).
 - **"Kubernetes — why does that matter to tests?"** → Rolling deploys can swap the target mid-run; readiness checks and retrying on the right conditions matter. See [Docker & Kubernetes](../../05_PROCESS_AND_TOOLING/03_Docker_And_Kubernetes.md).
 
 ---
@@ -97,7 +97,7 @@ Be precise about "I" vs "we". You *contributed to* the legacy framework; you *ow
 - **Don't blur the two stacks together.** Keep them cleanly separated by date and tool. The interviewer has your resume timeline open.
 - **Don't claim sole ownership of the legacy framework.** You contributed and owned specific areas (parallel stability, flakiness). "We" for the framework, "I" for your slice.
 - **Every decision needs a cost.** "I used fixtures" is junior. "I used fixtures over hooks, and the cost is a steeper learning curve" is senior.
-- **Keep AI honest.** Scaffolding and maintenance, 30% gain. Never self-healing selectors or agent architectures — you didn't run those in production.
+- **Keep AI honest.** Test drafting, locator refinement, maintenance support, 30% gain. Never self-healing selectors, Playwright MCP as a resume skill, or agent architectures — you didn't run those in production.
 - **Metrics stay pinned to their track.** 40→12 is Playwright. Under 2% flaky and 300+ scenarios are legacy. 90% coverage is NielsenIQ overall.
 
 ---

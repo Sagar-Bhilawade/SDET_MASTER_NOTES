@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**137 notes** · Last updated: 2026-09-10
+**140 notes** · Last updated: 2026-09-10
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -84,20 +84,23 @@ manual + automation testing make them fair game.
 
 ---
 
-## 02_PLAYWRIGHT — Track 1 (36) ✅
+## 02_PLAYWRIGHT — Track 1 (39) 🚧
 
-### 01_BASICS (9)
+### 01_BASICS (12) ✅
 | # | Note | Covers |
 |---|------|--------|
-| 01 | What Is Playwright | Why Playwright, vs Selenium, architecture contrast |
-| 02 | Browser, Context, Page | Three-level model, isolation, parallel foundation |
-| 03 | Locators | Role → testid → text → CSS, why CSS breaks |
-| 04 | Actions | High vs low-level, auto-wait behaviour |
-| 05 | Assertions | Web-first assertions, retry, what to assert |
-| 06 | Debugging | Trace viewer, video, inspector, replaying CI failures |
-| 07 | **Waiting Strategies** | 5 actionability checks, **where auto-waiting stops** |
-| 08 | Handling Complex UI | iframes, dialogs, tabs, uploads, downloads, shadow DOM |
+| 01 | What Is Playwright | Runner + browser automation + assertions + artifacts; honest Selenium/Cypress contrast |
+| 02 | Browser, Context, Page | Process/session/tab model, isolation, storage state, multi-user testing |
+| 03 | Locators | Role/label/text/test-id hierarchy, strict mode, filters, CSS/XPath fallback |
+| 04 | Actions | click/fill/check/select/upload/download, actionability, force-click risk |
+| 05 | Assertions | Locator/page/API/generic assertions, auto-retry vs non-retry, soft/poll/toPass |
+| 06 | Debugging | Trace viewer, report, video, UI mode, console/network evidence, CI failures |
+| 07 | **Waiting Strategies** | Actionability checks, web-first assertions, event waits, response waits, hard-wait red lines |
+| 08 | Handling Complex UI | iframes, dialogs, popups, uploads, downloads, shadow DOM, drag/drop |
 | 09 | Error Messages And Exceptions | strict mode, timeout, actionability, closed context, auth/setup errors |
+| 10 | Navigation And Events | `goto`, URL/load-state waits, popup/download/request/response event pre-wait |
+| 11 | Emulation, Devices, And Permissions | device presets, viewport, locale/timezone, permissions, geolocation, browser matrix |
+| 12 | Clock And Time-Dependent Testing | browser clock control, date/timer testing, browser-time vs server-time boundary |
 
 ### 02_FRAMEWORK (12)
 | # | Note | Covers |

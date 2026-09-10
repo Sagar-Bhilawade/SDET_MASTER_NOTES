@@ -1,299 +1,127 @@
-# Playwright - Error Messages And Exceptions
+# Error Messages And Exceptions
 
-## What it is
+## 1. What It Is
 
-This note is the quick map from common Playwright error wording to root cause and fix.
+Playwright errors are diagnostic signals. The goal is not memorizing every stack trace;
+the goal is hearing the error family and knowing where to investigate.
 
-Interviewers may ask:
+## 2. Why It Matters In Interviews
 
-> "If locator matches multiple elements, what error do you get?"
-> "What happens when an element is hidden?"
-> "What common Playwright failures have you debugged?"
+Interviewers ask errors to check whether you debug systematically. Strong SDETs classify
+the failure before increasing timeout or adding `force`.
 
-The goal is not to memorize every stack trace. The goal is to hear the error and know what
-category it belongs to.
+## 3. Complete Topic Breakdown
 
-## Why it matters
-
-Knowing exact error types shows real framework experience. Anyone can say "test failed";
-an SDET should say whether it failed because of locator ambiguity, actionability, timeout,
-closed context, auth/session issue, assertion mismatch, or environment setup.
-
-## 30-second answer
-
-> "The common Playwright errors I watch for are strict mode violation when a locator matches
-> multiple elements, timeout errors when an element or assertion does not become ready,
-> actionability failures when the element is hidden, disabled, unstable, or covered, closed
-> page/context errors, assertion mismatches, and environment issues like missing browser
-> binaries. I debug by first classifying the error, then using trace, screenshot, locator
-> inspection, and test data checks."
-
-## 2-minute answer
-
-> "I classify Playwright failures by category.
->
-> If the error says `strict mode violation`, the locator matched multiple elements. I fix it
-> by scoping to a parent row/card/dialog or using `filter({ hasText })`, not by blindly using
-> `.first()`.
->
-> If it is a timeout, I ask what was waiting: an action, a locator, navigation, or an
-> assertion. Timeout means the expected condition never became true within the configured
-> time.
->
-> If it is actionability, Playwright found the element but could not safely act on it because
-> it was hidden, disabled, moving, or covered by another element.
->
-> If it says page/context/browser closed, something ended the browser session before the
-> action completed.
->
-> For assertion failures, I check whether the product is wrong, the expected value is wrong,
-> or the assertion is too weak or too strict. Trace viewer is usually the fastest way to see
-> the real page state."
-
-## Common error map
-
-| Error wording | Meaning | Usual fix |
+| Error family | Meaning | First check |
 |---|---|---|
-| `strict mode violation ... resolved to 2 elements` | Locator matched multiple elements | Scope to parent, use `filter`, use unique role/name/testid |
-| `TimeoutError: locator.click: Timeout ... exceeded` | Click never became possible | Check visibility, enabled state, overlay, wrong locator |
-| `expect(locator).toBeVisible() with timeout` | Expected UI state did not appear | Check app state, data, API response, wrong assertion |
-| `element is not visible` | Element exists but user cannot see it | Wait/assert correct state, open parent menu/modal, fix locator |
-| `element is not enabled` | Element is disabled | Fill required fields, check validation/business state |
-| `element is outside of the viewport` | Element is not interactable in current viewport | Scroll, fix layout/viewport, use normal locator action |
-| `subtree intercepts pointer events` | Another element covers target | Close overlay, wait for animation, use correct visible target |
-| `Target page, context or browser has been closed` | Test tried action after page/context closed | Check teardown, popup handling, async/await, premature close |
-| `net::ERR_*` on `page.goto` | Navigation/network failure | Check URL, environment, VPN, server availability |
-| `No tests found` | Runner did not find matching tests | Check test path, grep, file naming, config |
-| `Executable doesn't exist ... install browsers` | Browser binaries missing | Run `npx playwright install` |
-| `forbidOnly` / `test.only` failure | Focused test committed or running in CI | Remove `test.only` / `describe.only` |
-| `toHaveText` mismatch | Text did not match expected value | Check exact vs partial match, whitespace, data, timing |
-| `response status expected 200 received 401` | Unauthenticated API call | Check token, `request` vs `page.request`, expired session |
-| `response status expected 200 received 403` | Authenticated but not permitted | Check role/permission, expected access |
+| Strict mode violation | Locator matched multiple elements | Scope/filter locator |
+| Timeout | Expected state/action did not complete | App state, data, wait type |
+| Actionability | Element not ready for action | Visible/stable/enabled/receives events |
+| Assertion failure | Expected result not met | Requirement, data, assertion |
+| Page/context/browser closed | Test acted after cleanup/close | Missing await, teardown, popup handling |
+| 401 | Not authenticated | Token/session/request mode |
+| 403 | Authenticated but not authorized | Role/permission |
+| Browser missing | Browsers not installed | `npx playwright install` |
+| No tests found | Pattern/project mismatch | `testDir`, `testMatch`, command |
+| `test.only` blocked | Focused test in CI | `forbidOnly: !!process.env.CI` |
 
-## Strict mode violation
+## 4. Manual Testing Angle
 
-Example:
+Manual QA also classifies before reporting: product issue, data issue, environment issue,
+or misunderstood requirement. Playwright debugging should follow the same discipline.
 
-```text
-locator.click: Error: strict mode violation:
-getByRole('button', { name: 'Edit' }) resolved to 2 elements
-```
+## 5. Automation Angle
 
-Meaning:
+Do not fix errors blindly:
 
-> "Playwright found more than one matching element and refused to guess which one to click."
+- strict mode -> improve locator,
+- timeout -> wait for correct state,
+- actionability -> inspect UI state,
+- assertion -> verify expected behavior,
+- 401/403 -> check auth/session/role,
+- closed page/context -> check async and cleanup.
 
-Good fix:
+## 6. Exact Surface To Remember
 
-```typescript
-const row = page.getByRole('row').filter({ hasText: 'sagar@test.com' });
-await row.getByRole('button', { name: 'Edit' }).click();
-```
-
-Interview line:
-
-> "Strict mode violation is not a bad Playwright behavior. It protects us from clicking the
-> wrong element."
-
-## Timeout errors
-
-Example:
+Common wording:
 
 ```text
-TimeoutError: locator.click: Timeout 30000ms exceeded
-```
-
-Meaning:
-
-> "Playwright waited for the action to become possible, but the condition never became true."
-
-Debug checklist:
-
-- Is locator correct?
-- Is element visible?
-- Is element enabled?
-- Is it covered by overlay?
-- Is test data creating the right state?
-- Did navigation/API call fail before this step?
-
-Interview line:
-
-> "Timeout is a symptom, not the root cause. I check what condition Playwright was waiting
-> for and why the page never reached that state."
-
-## Actionability errors
-
-Before actions like `click()` and `fill()`, Playwright checks actionability.
-
-For click, important checks include:
-
-- element is attached
-- element is visible
-- element is stable
-- element receives events
-- element is enabled
-
-Example:
-
-```text
-locator.click: element is not visible
-locator.click: element is not enabled
-locator.click: subtree intercepts pointer events
-```
-
-Good answer:
-
-> "These mean Playwright found the locator, but user-like interaction was not safe. I would
-> not force click first. I would check why the element is hidden, disabled, moving, or covered."
-
-## Assertion failures
-
-Example:
-
-```typescript
-await expect(page.getByRole('alert')).toContainText('Saved');
-```
-
-Possible failure:
-
-```text
-Error: expect(locator).toContainText(expected) failed
-```
-
-Meaning:
-
-> "The UI did not reach the expected state or my expected value/assertion is wrong."
-
-Good debug:
-
-- open trace
-- check actual text
-- check API response
-- check if assertion is exact or partial
-- check whether test data changed
-
-## Page/context/browser closed
-
-Example:
-
-```text
-Target page, context or browser has been closed
-```
-
-Meaning:
-
-> "The test tried to interact after the page or context was already closed."
-
-Common causes:
-
-- missing `await`
-- test teardown ran early
-- popup/new page was closed
-- context closed in fixture cleanup too soon
-- unhandled async work continued after test ended
-
-## API auth failures
-
-401:
-
-> "Not authenticated. Token missing, expired, invalid, or wrong request context."
-
-403:
-
-> "Authenticated but not authorized. User is logged in but does not have permission."
-
-Common Playwright-specific confusion:
-
-> "The isolated `request` fixture does not share browser session. If I need API call as the
-> logged-in UI user, I use `page.request`. For pure API tests, I attach bearer token in the
-> API request context."
-
-## Setup/config errors
-
-### Browser missing
-
-```text
-Executable doesn't exist ... Please run: npx playwright install
-```
-
-Fix:
-
-```bash
-npx playwright install
-```
-
-### No tests found
-
-```text
+strict mode violation
+Timeout 30000ms exceeded
+locator.click: Target closed
+element is not visible
+element is outside of the viewport
+subtree intercepts pointer events
+browserType.launch: Executable doesn't exist
 Error: No tests found
 ```
 
-Fix:
+Useful commands:
 
-- check file path
-- check `testMatch`
-- check grep pattern
-- check file naming like `.spec.ts`
-
-### `test.only` blocked
-
-```text
-Error: item focused with test.only is not allowed due to forbidOnly
+```bash
+npx playwright test --debug
+npx playwright show-trace trace.zip
+npx playwright install --with-deps
 ```
 
-Fix:
+## 7. Real Project Example
 
-> "Remove `test.only`. `forbidOnly` protects CI from accidentally running a partial suite."
+> "In BASES_PLAYWRIGHT, if a test fails with strict mode, I do not add `first()` by
+> default. I check why the locator is ambiguous. If it is a 401, I check whether the test
+> used isolated `request`, `page.request`, or a bearer-token API fixture."
 
-## Real project example
+## 8. Common Mistakes / Weak Areas
 
-> "In CI debugging, I first classify the failure. If it is strict mode, I check data volume
-> and locator scoping. If it is timeout/actionability, I open trace and check whether the
-> element was visible, enabled, stable, and not covered. If it is 401/403, I check whether I
-> used isolated request context, page request, or a bearer token fixture. This avoids guessing
-> and makes debugging much faster."
+- Treating every timeout as slow app.
+- Adding hard wait without checking state.
+- Using `force` for actionability failures.
+- Adding `first()` to hide strict mode.
+- Confusing 401 and 403.
+- Not checking missing browser install in fresh CI.
 
-## Common interview Q&A
+## 9. 30-Second Answer
 
-### Q1: "What error if locator matches multiple elements?"
+I classify Playwright errors first. Strict mode means locator ambiguity, timeout means
+the expected action/state did not complete, actionability means the element was not ready
+for user interaction, closed page/context often means async or cleanup issue, and 401/403
+points to auth or permission.
 
-**A:** "`strict mode violation ... resolved to 2 elements`. Playwright refuses to guess. I
-fix it by narrowing the locator using parent scope, `filter({ hasText })`, or a unique test
-id."
+## 10. 2-Minute Answer
 
-### Q2: "What do you do when click times out?"
+Playwright errors are usually helpful if you read them by category. For strict mode, I
+fix locator specificity. For timeouts, I check what was waiting: action, assertion, URL,
+event, or API state. For actionability, trace viewer shows if an overlay, disabled state,
+animation, or wrong target blocked the action. For auth failures, 401 means unauthenticated
+and 403 means authenticated but not permitted.
 
-**A:** "I check whether the locator is correct and whether actionability conditions are met:
-visible, stable, enabled, and receiving events. Trace viewer usually shows if an overlay,
-animation, wrong state, or data issue is the real cause."
+The trade-off is not to silence errors. A strict mode failure may be exposing a real
+ambiguous UI. An actionability failure may show the user also cannot click the element.
 
-### Q3: "Do you use force click?"
+## 11. Interview Q&A
 
-**A:** "Only as a last resort. If Playwright says it cannot click like a user, I first find
-why. Force click can hide a real product or locator issue."
+### Q: What is strict mode violation?
 
-### Q4: "Why no stale element in Playwright?"
+The locator matched more than one element for an action that expects one. Fix by scoping,
+filtering, or using better locator.
 
-**A:** "Playwright locators are lazy and re-resolve on every action. Selenium WebElement
-stores a reference that can go stale after DOM re-render, but Playwright locator describes
-how to find the element again."
+### Q: What do you do when click times out?
 
-### Q5: "How do you debug 401 in API tests?"
+Open trace and check visibility, stability, enabled state, overlay, viewport, locator
+target, and app/data state.
 
-**A:** "I check whether the call used isolated `request`, `page.request`, or a token-based
-context. Isolated request has no browser session, so if the endpoint needs logged-in browser
-auth, `page.request` is the correct choice."
+### Q: Difference between 401 and 403?
 
-## Weak areas to watch
+401 means not authenticated. 403 means authenticated but not authorized.
 
-- Do not say "some error comes" when exact wording is `strict mode violation`.
-- Do not use `.first()` blindly to silence strict mode.
-- Do not treat every timeout as a wait problem; check app state and data.
-- Do not confuse 401 and 403.
-- Do not force click before understanding actionability.
+### Q: Why no stale element like Selenium?
 
-## Key takeaway
+Playwright locators re-resolve elements at action/assertion time instead of keeping an
+old WebElement reference.
 
-> "Playwright errors are useful signals. Strict mode means locator ambiguity, timeout means
-> expected state never happened, actionability means user-like interaction was unsafe, and
-> 401/403 means auth state or permission. Classify first, then fix."
+## 12. Quick Revision Points
+
+- Classify error family.
+- Strict mode = ambiguity.
+- Timeout = state did not happen.
+- Actionability = user-like interaction blocked.
+- 401 auth, 403 permission.

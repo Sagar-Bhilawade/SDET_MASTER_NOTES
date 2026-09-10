@@ -1,344 +1,207 @@
-# Playwright - Assertions: Validating Test Outcomes
+# Assertions
 
-## What Are Assertions?
+## 1. What It Is
 
-Assertions are checks you make to verify that something happened correctly. After you perform an action, you assert the result.
+Assertions verify expected behavior. In Playwright, `expect` has web-first assertions
+that auto-retry for UI state, plus normal generic assertions for values, objects, arrays,
+and API response data.
 
-Basic flow:
-```
-1. Perform action (click, type, etc.)
-2. Assert the result (check what happened)
-3. Test passes or fails
-```
+Actions make something happen. Assertions prove the expected result happened.
 
-Examples:
-- Assert a button is visible → `await expect(button).toBeVisible();`
-- Assert text appears on page → `await expect(page).toContainText('Welcome');`
-- Assert URL changed → `await expect(page).toHaveURL('/dashboard');`
+## 2. Why It Matters In Interviews
 
-**Key difference from actions:** Actions DO something. Assertions CHECK that something happened.
+Assertions decide whether tests catch real bugs or only perform steps. Interviewers often
+probe exact matcher differences, auto-retry behavior, soft assertions, API assertions,
+and weak assertion traps.
 
----
+## 3. Complete Topic Breakdown
 
-## Why It Matters (Interview Context)
+### Auto-retrying locator assertions
 
-Interviewers ask about assertions because:
-1. **Shows you understand test design** (what to check, not just what to do)
-2. **Demonstrates test stability** (which assertions are flaky vs reliable)
-3. **Explains test maintainability** (writing meaningful assertions, not brittle checks)
-4. **Shows automation maturity** (testing behavior, not implementation)
+| Assertion | Checks |
+|---|---|
+| `toBeVisible()` | Element is visible |
+| `toBeHidden()` | Element is hidden or not visible |
+| `toBeAttached()` | Element exists in DOM |
+| `toBeChecked()` | Checkbox/radio is checked |
+| `toBeDisabled()` | Element is disabled |
+| `toBeEnabled()` | Element is enabled |
+| `toBeEditable()` | Element can be edited |
+| `toBeEmpty()` | Element/input has no content |
+| `toBeFocused()` | Element has focus |
+| `toBeInViewport()` | Element intersects viewport |
+| `toHaveText()` | Exact/full text match |
+| `toContainText()` | Partial text match |
+| `toHaveValue()` | Input value |
+| `toHaveValues()` | Selected values in multi-select |
+| `toHaveCount()` | Locator resolves to exact count |
+| `toHaveAttribute()` | Attribute value |
+| `toHaveClass()` | Class list/string |
+| `toContainClass()` | Contains class without exact full match |
+| `toHaveCSS()` | Computed CSS property |
+| `toHaveId()` | Element id |
+| `toHaveJSProperty()` | JS property |
+| `toHaveRole()` | ARIA role |
+| `toHaveAccessibleName()` | Accessible name |
+| `toHaveAccessibleDescription()` | Accessible description |
+| `toHaveScreenshot()` | Element screenshot baseline |
+| `toMatchAriaSnapshot()` | ARIA tree snapshot |
 
-Your assertion strategy determines if tests catch real bugs or just run without failing.
+### Page and response assertions
 
----
+| Assertion | Checks |
+|---|---|
+| `expect(page).toHaveURL()` | Current URL |
+| `expect(page).toHaveTitle()` | Page title |
+| `expect(page).toHaveScreenshot()` | Page screenshot baseline |
+| `expect(page).toMatchAriaSnapshot()` | Page ARIA snapshot |
+| `expect(response).toBeOK()` | API response status is OK |
 
-## Your 30-Second Interview Answer
+### Generic non-retrying assertions
 
-> "In Playwright, assertions are checks that verify expected behavior. I use `expect()` for all assertions because it has auto-waiting and clear failure messages. Common assertions: `toBeVisible()`, `toContainText()`, `toHaveURL()`, `toHaveCount()`. At NielsenIQ, the discipline I care about is that every assertion can actually fail — a test that walks a flow and asserts a container is visible passes forever and catches nothing."
+Use these for values already captured, not for waiting on UI:
 
----
+- `toBe`, `toEqual`, `toStrictEqual`, `toMatchObject`
+- `toContain`, `toContainEqual`, `toHaveLength`, `toHaveProperty`, `toMatch`
+- `toBeTruthy`, `toBeFalsy`, `toBeDefined`, `toBeUndefined`, `toBeNull`, `toBeNaN`
+- `toBeGreaterThan`, `toBeGreaterThanOrEqual`, `toBeLessThan`, `toBeLessThanOrEqual`
+- `toBeCloseTo`, `toBeInstanceOf`, `toThrow`
 
-## Your 2-Minute Deep Answer
+### Assertion control
 
-> "Playwright's `expect()` API is powerful because it combines checking AND waiting.
->
-> **Why Playwright's Expect is Different:**
->
-> In Selenium, you'd write:
-> ```java
-> WebElement element = driver.findElement(By.id('message'));
-> assert element.isDisplayed();  // No waiting - fails immediately if not visible
-> assert element.getText().equals('Welcome');
-> ```
->
-> In Playwright:
-> ```typescript
-> await expect(page.getByTestId('message')).toBeVisible();  // Auto-waits up to 30s
-> await expect(page.getByTestId('message')).toContainText('Welcome');
-> ```
->
-> See the difference? Playwright's `expect()` auto-waits. If the element isn't visible yet, it waits (default 30 seconds) before failing. This eliminates timing issues.
->
-> **Common Assertions:**
->
-> **1. VISIBILITY ASSERTIONS**
-> ```
-> await expect(page.getByTestId('success-message')).toBeVisible();
-> await expect(page.getByTestId('error-modal')).toBeHidden();
-> await expect(page.getByTestId('spinner')).not.toBeVisible();
-> ```
-> When to use:
-> - After actions that show/hide elements
-> - Waiting for modals, alerts, spinners
-> - Verifying elements appear/disappear
->
-> **2. TEXT ASSERTIONS**
-> ```
-> await expect(page).toContainText('Welcome, Sagar');
-> await expect(page.getByTestId('dashboard-title')).toHaveText('Dashboard');
-> await expect(page.locator('button')).toContainText('Submit');
-> ```
-> `toHaveText()` = exact match
-> `toContainText()` = partial match
->
-> When to use:
-> - Verify success messages
-> - Check form labels
-> - Validate page content
->
-> **3. URL ASSERTIONS**
-> ```
-> await expect(page).toHaveURL('/dashboard');
-> await expect(page).toHaveURL(/\\/dashboard\\/.*/);  // Regex match
-> ```
-> When to use:
-> - After navigation
-> - Verify correct page loaded
-> - Check URL parameters
->
-> **4. COUNT ASSERTIONS**
-> ```
-> await expect(page.locator('li')).toHaveCount(5);  // Exactly 5 items
-> ```
-> When to use:
-> - Verify list has correct number of items
-> - Check table rows
->
-> **5. ATTRIBUTE ASSERTIONS**
-> ```
-> await expect(page.getByTestId('input')).toHaveValue('john@example.com');
-> await expect(page.getByTestId('checkbox')).toBeChecked();
-> await expect(page.getByRole('button')).toBeDisabled();
-> await expect(page.getByRole('button')).toBeEnabled();
-> ```
-> When to use:
-> - Verify form values
-> - Check checkbox/radio states
-> - Verify disabled/enabled state
->
-> **6. CLASS/ATTRIBUTE ASSERTIONS**
-> ```
-> await expect(page.getByTestId('item')).toHaveClass('selected');
-> await expect(page.getByTestId('link')).toHaveAttribute('href', '/home');
-> ```
-> When to use:
-> - Verify CSS classes applied
-> - Check HTML attributes
-> - Validate styling state
->
-> **7. SCREENSHOT/VISUAL ASSERTIONS**
-> ```
-> await expect(page).toHaveScreenshot();
-> ```
-> When to use:
-> - Visual regression testing
-> - Verify layout didn't break
-> - Compare against baseline
->
-> **Best Practice: Assert Behavior, Not Implementation**
->
-> ❌ Don't assert:
-> ```
-> await expect(page.locator('.modal-overlay')).toBeVisible();  // CSS class - fragile
-> await expect(page.locator('div[data-id=\"123\"]')).toContainText('Item');  // Implementation detail
-> ```
->
-> ✅ Do assert:
-> ```
-> await expect(page.getByRole('dialog')).toBeVisible();  // User sees a dialog
-> await expect(page.getByText('Welcome, Sagar')).toBeVisible();  // User sees welcome message
-> ```
->
-> **At NielsenIQ:**
->
-> Our assertion strategy:
-> 1. Assert visible outcomes (what user sees)
-> 2. Use high-level assertions (toBeVisible, toContainText)
-> 3. Avoid implementation details (CSS selectors in assertions)
-> 4. Always use `expect()` with auto-waiting
-> 5. One assertion per test step (clear failure messages)
->
-> Result:
-> - ✅ Clear pass/fail across the suite
-> - ✅ Assertions auto-wait (no flakiness)
-> - ✅ Test failures point to real bugs
-> - ✅ Failures point at real bugs, not weak assertions"
+- `.not`
+- `expect.soft`
+- custom assertion message
+- `expect.configure`
+- `expect.poll`
+- `expect.toPass`
+- `expect.extend`
+- asymmetric matchers: `expect.any`, `expect.anything`, `expect.objectContaining`,
+  `expect.arrayContaining`, `expect.stringContaining`, `expect.stringMatching`
 
----
+## 4. Manual Testing Angle
 
-## Assertion Types Comparison
+Manual testers ask: what proves this behavior? Automation assertions should mirror that.
+Do not assert that a container exists if the real requirement is that the submitted
+status, saved data, or permission behavior is correct.
 
-| Assertion | Syntax | Auto-Waits | When to Use |
-|-----------|--------|-----------|------------|
-| **Visibility** | `toBeVisible()` | Yes | After actions that show elements |
-| **Hidden** | `toBeHidden()` | Yes | After actions that hide elements |
-| **Text Match** | `toHaveText('exact')` | Yes | Verify exact text |
-| **Text Contains** | `toContainText('partial')` | Yes | Verify partial text |
-| **URL** | `toHaveURL('/path')` | Yes | After navigation |
-| **Count** | `toHaveCount(5)` | Yes | Verify list/table length |
-| **Value** | `toHaveValue('input value')` | Yes | Check form input values |
-| **Checked** | `toBeChecked()` | Yes | Verify checkbox is checked |
-| **Enabled** | `toBeEnabled()` | Yes | Verify button is clickable |
-| **Disabled** | `toBeDisabled()` | Yes | Verify element is disabled |
-| **Class** | `toHaveClass('active')` | Yes | Verify CSS class |
-| **Attribute** | `toHaveAttribute('href', '/url')` | Yes | Check HTML attributes |
-| **Screenshot** | `toHaveScreenshot()` | Yes | Visual regression testing |
+## 5. Automation Angle
 
----
-
-## Your Real Project Example (NielsenIQ)
-
-**Login Test with Proper Assertions:**
+Prefer web-first assertions for UI state:
 
 ```typescript
-async function testLogin(page: Page) {
-  // 1. Action: Fill form
-  await page.getByTestId('email-input').fill('user@example.com');
-  await page.getByTestId('password-input').fill('password123');
-  
-  // 2. Action: Submit
-  await page.getByRole('button', { name: 'Sign In' }).click();
-  
-  // 3. ASSERTIONS: Verify login succeeded
-  
-  // ✅ Assert user is logged in (URL changed)
-  await expect(page).toHaveURL('/dashboard');
-  
-  // ✅ Assert dashboard loaded (main element visible)
-  await expect(page.getByTestId('dashboard-header')).toBeVisible();
-  
-  // ✅ Assert user name displayed
-  await expect(page.getByText('Welcome, Sagar')).toBeVisible();
-  
-  // ✅ Assert logout button present (only logged-in users see this)
-  await expect(page.getByRole('button', { name: 'Logout' })).toBeEnabled();
-}
+await expect(page.getByRole('alert')).toContainText('Saved');
 ```
 
-**Why these assertions are good:**
-- They check what the USER sees (not implementation)
-- They auto-wait (no flakiness)
-- They're specific (clear failure messages)
-- They test behavior (user is logged in)
-
-**Contrast with bad assertions:**
+Avoid pulling a value too early and asserting synchronously:
 
 ```typescript
-// ❌ BAD: Asserts implementation details
-await expect(page.locator('.user-profile-modal')).toBeVisible();  // CSS class fragile
-await expect(page.locator('div.hidden')).toBeHidden();  // Fragile CSS
-
-// ❌ BAD: No auto-waiting
-console.assert(element.isDisplayed());  // Old Selenium style
-
-// ❌ BAD: Too specific
-await expect(page.getByText('Welcome, Sagar Bhilawade (SDET)')).toHaveText('exact string');  // Breaks if name format changes
+expect(await locator.textContent()).toBe('Saved'); // can be flaky
 ```
 
----
-
-## Common Interview Questions & Answers
-
-### Q1: "What's the difference between `toHaveText()` and `toContainText()`?"
-
-**A:** "`toHaveText()` checks for exact match. `toContainText()` checks if the text contains that string. For example, if the page says 'Welcome to Dashboard', `toHaveText('Welcome')` fails but `toContainText('Welcome')` passes. Use `toHaveText()` for exact values, `toContainText()` for flexible matching."
-
-### Q2: "How does Playwright's `expect()` handle waits?"
-
-**A:** "Playwright's `expect()` auto-waits up to 30 seconds (configurable). If the assertion would fail, it keeps retrying until the timeout. This eliminates timing issues. In Selenium, if an element isn't ready, the assertion fails immediately with no retries."
-
-### Q3: "Should I assert every action?"
-
-**A:** "Not every action needs an assertion. After every USER-VISIBLE action, yes. For example: click submit → assert success message. But don't assert internal state or implementation details. Assert behavior, not implementation."
-
-### Q4: "What if an assertion fails? How do you debug it?"
-
-**A:** "Playwright gives a clear failure message. For example: 'Expected element to be visible but it was not.' The trace/video shows exactly what happened. We don't need to guess - the failure message points to the issue."
-
-### Q5: "How do you test dynamic content?"
-
-**A:** "Use `toContainText()` instead of exact text matching. For example, if the page shows 'You have 5 items' but the count changes, use `toContainText('You have')` instead of matching the exact number."
-
----
-
-## What You Should Be Ready to Explain
-
-✅ Why `expect()` is better than manual assertions  
-✅ How auto-waiting eliminates timing issues  
-✅ Difference between toHaveText and toContainText  
-✅ Common assertions and when to use them  
-✅ Why you assert behavior, not implementation  
-✅ Your assertion strategy at NielsenIQ (every assertion must be able to fail)  
-
----
-
-## Weak Areas to Watch
-
-❌ **Don't say:** "I assert everything, even internal state"  
-→ **Reality:** Assert user-visible behavior only
-
-❌ **Don't use:** Fragile CSS selectors in assertions  
-→ **Reality:** Use semantic locators (getByRole, getByTestId)
-
-❌ **Don't write:** Multiple assertions per step  
-→ **Reality:** One clear assertion per step (better error messages)
-
-❌ **Don't ignore:** Auto-waiting  
-→ **Reality:** It's your biggest advantage over Selenium
-
----
-
-## Key Takeaway for Interview
-
-Assertions are not just "checks at the end." They're:
-
-1. **Auto-waiting** → No timing issues
-2. **Behavior-focused** → Test what users see
-3. **Clear failures** → Easy debugging
-4. **Maintainable** → Don't rely on implementation details
-
-Your assertion strategy shows if you write tests that catch real bugs or just run without errors.
-
-**At NielsenIQ:** The rule that matters is that a green test with a weak assertion is more dangerous than a red one — red gets fixed, green gets trusted.
-
-**Your competitive edge:** You assert behavior, not implementation. That's mature testing. ✨
-
----
-
-## Practical Code Pattern (For Reference)
+Use `expect.poll` for eventually consistent non-UI state:
 
 ```typescript
-// ✅ GOOD: Clear, behavior-focused assertions
-async function testCheckout(page: Page) {
-  // Action
-  await page.getByRole('button', { name: 'Proceed to Checkout' }).click();
-  
-  // Assertions (what user should see)
-  await expect(page).toHaveURL(/.*checkout/);
-  await expect(page.getByRole('heading', { name: 'Order Summary' })).toBeVisible();
-  await expect(page.getByTestId('total-price')).toContainText('$99.99');
-  await expect(page.getByRole('button', { name: 'Place Order' })).toBeEnabled();
-}
-
-// ✅ GOOD: Dynamic content
-async function testSearch(page: Page) {
-  await page.getByTestId('search-input').fill('laptop');
-  await page.getByRole('button', { name: 'Search' }).click();
-  
-  // Auto-waits for results to load
-  await expect(page.getByTestId('search-results')).toBeVisible();
-  
-  // Assert count (flexible for dynamic results)
-  await expect(page.locator('[data-testid="result-item"]')).toHaveCount(
-    await page.locator('[data-testid="result-item"]').count()
-  );
-}
-
-// ❌ AVOID: Implementation details
-await expect(page.locator('.hidden-implementation-detail')).toBeHidden();
-await expect(page.locator('button.btn-primary.px-4.py-2')).toContainText('Submit');
+await expect.poll(async () => {
+  const response = await page.request.get('/api/jobs/123');
+  return response.status();
+}).toBe(200);
 ```
 
----
+## 6. Exact Surface To Remember
 
-**Remember:** Your assertions are what make tests USEFUL. Write them for behavior, not implementation. 🎯
+```typescript
+await expect(locator).toBeVisible();
+await expect(locator).toBeHidden();
+await expect(locator).toHaveText('Submitted');
+await expect(locator).toContainText('Submit');
+await expect(locator).toHaveCount(3);
+await expect(locator).toHaveValue('sagar@example.com');
+await expect(locator).toBeChecked();
+await expect(locator).toBeEnabled();
+await expect(locator).toBeDisabled();
+await expect(locator).toHaveAttribute('href', '/dashboard');
+```
+
+```typescript
+await expect(page).toHaveURL(/.*dashboard/);
+await expect(page).toHaveTitle(/Dashboard/);
+await expect(response).toBeOK();
+```
+
+```typescript
+await expect.soft(locator).toHaveText('Success');
+await expect(locator, 'success message should appear').toBeVisible();
+const slowExpect = expect.configure({ timeout: 10000 });
+await slowExpect(locator).toHaveText('Ready');
+```
+
+## 7. Real Project Example
+
+> "In BASES_PLAYWRIGHT, I do not stop at clicking through a flow. After each meaningful
+> action, I assert the user-visible or API-backed outcome: status text, URL, row count,
+> saved field value, or response status. A green test with a weak assertion is dangerous
+> because it creates false confidence."
+
+## 8. Common Mistakes / Weak Areas
+
+- Asserting only visibility when the real behavior is data correctness.
+- Using generic assertions for async UI state.
+- Forgetting `await` before web-first assertions.
+- Using exact text for dynamic messages.
+- Overusing soft assertions.
+- Treating screenshot assertions as functional validation.
+- Using `.not` without first proving the right state/change.
+
+## 9. 30-Second Answer
+
+Playwright assertions use `expect`. For UI, I prefer web-first assertions like
+`toBeVisible`, `toHaveText`, `toHaveURL`, and `toHaveCount` because they auto-retry until
+the expected state appears. Generic assertions like `toEqual` do not auto-retry, so I use
+them for captured values or API bodies, not waiting on UI.
+
+## 10. 2-Minute Answer
+
+My assertion strategy is behavior-first. I assert what proves the requirement: success
+message, URL, persisted field value, permission result, row count, or API response. In
+Playwright, locator/page assertions are async and retry until timeout, which makes them
+better for dynamic UI than reading text once and using `toBe`.
+
+For APIs or computed values, I use generic assertions like `toMatchObject`,
+`toContainEqual`, or `toHaveProperty`. For eventually consistent backend behavior, I use
+`expect.poll` or `expect.toPass`. The trade-off is not to assert everything. Too many
+low-value assertions make tests noisy; too few make them meaningless.
+
+## 11. Interview Q&A
+
+### Q: `toHaveText` vs `toContainText`?
+
+`toHaveText` expects the complete text match. `toContainText` accepts partial text. Use
+exact when the full value matters; use contains for dynamic or longer text.
+
+### Q: `toBeVisible` vs `toBeAttached`?
+
+Attached means present in DOM. Visible means user can see it. A hidden element can be
+attached but not visible.
+
+### Q: Why avoid `expect(await locator.textContent()).toBe()`?
+
+It reads text once. Web-first assertions retry, so `await expect(locator).toHaveText()`
+is safer for async UI.
+
+### Q: When use soft assertions?
+
+For collecting multiple independent checks in one flow, but not when later steps depend
+on earlier checks passing.
+
+### Q: When use `expect.poll`?
+
+When the thing to retry is not a simple locator state, such as polling API/job status.
+
+## 12. Quick Revision Points
+
+- Web-first assertions auto-retry.
+- Generic assertions do not auto-retry.
+- Assert behavior, not implementation.
+- `toBeAttached` is DOM; `toBeVisible` is user-visible.
+- Use `expect.poll` for eventually consistent non-UI checks.

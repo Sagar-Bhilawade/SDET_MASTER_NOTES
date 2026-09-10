@@ -30,6 +30,43 @@ and when low-level actions are risky.
 | Drag | `locator.dragTo(target)` | Drag-drop UI |
 | Focus/blur | `locator.focus()`, `locator.blur()` | Focus behavior |
 
+### Which actions wait for which checks
+
+Playwright actionability is not the same for every action. Memorize the pattern, not only
+the word "auto-wait".
+
+| Action | Visible | Stable | Receives Events | Enabled | Editable |
+|---|:---:|:---:|:---:|:---:|:---:|
+| `locator.click()` | Yes | Yes | Yes | Yes | - |
+| `locator.dblclick()` | Yes | Yes | Yes | Yes | - |
+| `locator.check()` | Yes | Yes | Yes | Yes | - |
+| `locator.uncheck()` | Yes | Yes | Yes | Yes | - |
+| `locator.setChecked()` | Yes | Yes | Yes | Yes | - |
+| `locator.tap()` | Yes | Yes | Yes | Yes | - |
+| `locator.hover()` | Yes | Yes | Yes | - | - |
+| `locator.dragTo()` | Yes | Yes | Yes | - | - |
+| `locator.screenshot()` | Yes | Yes | - | - | - |
+| `locator.fill()` | Yes | - | - | Yes | Yes |
+| `locator.clear()` | Yes | - | - | Yes | Yes |
+| `locator.selectOption()` | Yes | - | - | Yes | - |
+| `locator.selectText()` | Yes | - | - | - | - |
+| `locator.scrollIntoViewIfNeeded()` | - | Yes | - | - | - |
+| `locator.blur()` | - | - | - | - | - |
+| `locator.dispatchEvent()` | - | - | - | - | - |
+| `locator.focus()` | - | - | - | - | - |
+| `locator.press()` | - | - | - | - | - |
+| `locator.pressSequentially()` | - | - | - | - | - |
+| `locator.setInputFiles()` | - | - | - | - | - |
+
+Important interpretation:
+
+- Click-like actions need visible, stable, receives events, and enabled.
+- Text-entry actions like `fill` need visible, enabled, and editable, but not stable or
+  receives events.
+- Keyboard/focus/dispatch/file-input actions do not wait for the full user-click checks.
+- If the action does not wait for the state you need, add the right assertion/wait before
+  or after it.
+
 ## 4. Manual Testing Angle
 
 Manual testers know the difference between a user-visible action and an implementation
@@ -132,10 +169,17 @@ click.
 The element may be hidden, disabled, moving, covered by overlay, outside viewport, or the
 locator may point to the wrong element.
 
+### Q: Do all actions wait for the same checks?
+
+No. Click waits for visible, stable, receives events, and enabled. Fill waits for visible,
+enabled, and editable. Press/focus/dispatch/file upload do not perform the full click-like
+actionability checks, so add explicit assertions when the state matters.
+
 ## 12. Quick Revision Points
 
 - Actions do; assertions check.
 - Prefer locator actions.
 - `fill` for normal text fields.
+- Different actions wait for different checks.
 - Event waits must start before the action.
 - Avoid `force` as a normal fix.

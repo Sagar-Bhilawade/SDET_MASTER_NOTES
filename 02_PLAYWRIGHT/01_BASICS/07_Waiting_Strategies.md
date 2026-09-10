@@ -23,6 +23,22 @@ Before many actions, Playwright checks:
 - enabled,
 - editable where relevant.
 
+### Actionability matrix
+
+| Action | Visible | Stable | Receives Events | Enabled | Editable |
+|---|:---:|:---:|:---:|:---:|:---:|
+| `click`, `dblclick`, `check`, `uncheck`, `setChecked`, `tap` | Yes | Yes | Yes | Yes | - |
+| `hover`, `dragTo` | Yes | Yes | Yes | - | - |
+| `screenshot` | Yes | Yes | - | - | - |
+| `fill`, `clear` | Yes | - | - | Yes | Yes |
+| `selectOption` | Yes | - | - | Yes | - |
+| `selectText` | Yes | - | - | - | - |
+| `scrollIntoViewIfNeeded` | - | Yes | - | - | - |
+| `blur`, `dispatchEvent`, `focus`, `press`, `pressSequentially`, `setInputFiles` | - | - | - | - | - |
+
+This is the follow-up point: Playwright auto-waits, but **not every action waits for the
+same things**.
+
 ### Wait types
 
 | Wait | Syntax | Use |
@@ -119,6 +135,16 @@ targeted waits where the app genuinely needs time.
 Auto-waiting waits for actionability and assertions, not wrong data, failed API, bad
 requirements, environment down, or custom business state.
 
+### Q: Which actionability checks does click perform?
+
+Click waits for one matching element, visible, stable, receives events, and enabled. It
+does not wait for business state like "data saved".
+
+### Q: Does `press()` wait like `click()`?
+
+No. Keyboard-style actions such as `press()` do not perform the full click actionability
+matrix. If the element/state must be visible or ready, assert that separately.
+
 ### Q: Why is hard wait bad?
 
 It is either too short and flaky or too long and slow. It waits for time, not condition.
@@ -134,6 +160,7 @@ If the event happens immediately, starting the wait after the action can miss it
 ## 12. Quick Revision Points
 
 - Auto-waiting is not magic.
+- Different actions have different actionability checks.
 - Wait for state, not seconds.
 - Web-first assertions retry.
 - Event waits start before action.

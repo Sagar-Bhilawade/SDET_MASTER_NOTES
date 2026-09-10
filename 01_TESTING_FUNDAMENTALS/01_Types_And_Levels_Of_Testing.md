@@ -1,188 +1,190 @@
 # Types & Levels of Testing
 
-## What This Covers
+## 1. What It Is
 
-The classification questions — functional vs non-functional, the four test levels, and the pairs interviewers love: smoke vs sanity, regression vs retesting.
+Testing types explain **what quality risk** we are checking. Testing levels explain
+**where in the system** we are checking it.
 
----
+For interviews, do not only define smoke, sanity, regression, and retesting. Show that
+you know how to use them in real sprint work: what should be manual, what should be
+automated, what should block CI, and what should run later.
 
-## Why It Matters (Interview Context)
+## 2. Why It Matters In Interviews
 
-These are **warm-up questions**, and that's exactly why they're dangerous. An interviewer opens with *"difference between smoke and sanity"* expecting a quick clean answer before moving to the real material.
+This is usually a warm-up question. If the answer is confused, the interviewer assumes
+your foundation is weak. If you answer cleanly and add operational judgement, you sound
+like someone who has tested real releases.
 
-Fumble it and you've set a bad tone before reaching the automation depth where you're strong. Nail it in fifteen seconds and you move on.
+Strong signal:
 
-The senior addition: knowing that some of these distinctions matter operationally and some are mostly vocabulary. Saying which is which is a differentiator.
+- You separate testing **type** from testing **level**.
+- You know smoke vs sanity and regression vs retesting instantly.
+- You know automation is strongest for repeated regression, not for every human check.
+- You can explain the test pyramid as a cost and stability decision.
 
----
+## 3. Complete Topic Breakdown
 
-## Your 30-Second Interview Answer
+### Testing types
 
-> "Test levels go unit, integration, system, then acceptance — increasing scope, decreasing isolation. Functional testing checks what the system does; non-functional checks how well it does it — speed, security, usability. Smoke is a shallow check that the build is worth testing at all; sanity is a narrow check that one specific fix works. Regression is verifying that unrelated things still work after a change; retesting is verifying the specific defect is actually fixed."
+| Type                   | What it checks                               | Practical usage                                 |
+| ---------------------- | -------------------------------------------- | ----------------------------------------------- |
+| Functional testing     | Whether feature behavior matches requirement | Login, search, filters, exports, calculations   |
+| Non-functional testing | How well the system works                    | Performance, security, usability, accessibility |
+| Smoke testing          | Whether the build is testable                | Fast build gate after deployment                |
+| Sanity testing         | Whether a specific change/fix is reasonable  | Focused check before deeper testing             |
+| Regression testing     | Existing behavior after a change             | Main automation candidate                       |
+| Retesting              | Specific defect fix                          | Same bug, same steps, new build                 |
+| Exploratory testing    | Unknown risks and surprising behavior        | Charter-based investigation                     |
+| UAT                    | Business acceptability                       | Product/user sign-off                           |
+| Compatibility testing  | Supported browser/device/platform behavior   | Cross-browser and responsive checks             |
 
----
+### Testing levels
 
-## Your 2-Minute Deep Answer
+| Level             | Scope                           | Best use                      |
+| ----------------- | ------------------------------- | ----------------------------- |
+| Unit              | Function/class                  | Logic and small branches      |
+| Component/service | One module/service              | API contracts and validation  |
+| Integration       | Multiple components together    | Service-to-service, API-to-DB |
+| System            | Whole application               | Full feature behavior         |
+| End-to-end        | Business journey across systems | Critical user flows only      |
+| Acceptance/UAT    | Business workflow               | Final business confidence     |
 
-> "**The four test levels — scope increasing, isolation decreasing:**
->
-> | Level | Scope | Usually owned by |
-> |---|---|---|
-> | **Unit** | One function or class, dependencies mocked | Developers |
-> | **Integration** | Two or more components talking | Developers / SDET |
-> | **System** | The whole application end to end | QA / SDET |
-> | **Acceptance (UAT)** | Does it meet business needs | Business / product |
->
-> The practical point is the **test pyramid**: many unit tests, fewer integration, fewest end-to-end. Because cost and fragility rise as you go up. That's the same argument I make about pushing validation to the API layer — a UI test costs roughly fifty times an API test on every run.
->
-> The failure mode is the **inverted pyramid** — a team with almost everything at the E2E level. Slow, flaky, and expensive to maintain, and it's what happens when QA owns testing entirely and developers own none of it.
->
-> ---
->
-> **Functional vs non-functional:**
->
-> Functional = *what* it does. Does login work, does the discount calculate correctly.
->
-> Non-functional = *how well*. How fast, how many concurrent users, how secure, how usable.
->
-> Worth saying: non-functional defects are often the more expensive ones. A feature that works but takes eleven seconds to load is a real problem that functional testing passes cleanly.
->
-> ---
->
-> **Smoke vs Sanity — the classic:**
->
-> **Smoke** — shallow and wide. Does the application start, can you log in, do the main screens load? The question it answers is *"is this build worth testing at all?"* Run it first; if it fails, reject the build and don't waste the team's time.
->
-> **Sanity** — narrow and deep. A specific area, after a specific change. *"They fixed the discount calculation — does discount now work?"*
->
-> **The honest addition:** in practice a lot of teams use these terms interchangeably, and the exact distinction matters less than the operational reality — you want a fast blocking suite that gates the build, and deeper suites that run less often. I'd give the textbook answer and then say that, because it shows you know the definition *and* how it actually plays out.
->
-> ---
->
-> **Regression vs Retesting — the other classic:**
->
-> **Retesting** — verifying the specific defect is fixed. Same steps, same data, on the new build. Only makes sense on a build claiming the fix.
->
-> **Regression** — verifying that *other* things still work. Nothing to do with the defect itself; it's about the side effects of changing code.
->
-> Two differences worth naming: retesting is targeted and can't be planned in advance (you don't know what will need retesting until something fails), whereas regression is broad and is exactly what you automate. And **retesting comes first** — no point running the full regression if the fix itself doesn't work.
->
-> ---
->
-> **Other types worth knowing:**
->
-> **Exploratory** — simultaneous learning, design, and execution. Not random; it's structured investigation with a charter. It finds a category of bug automation structurally can't, because automation only checks what you thought to tell it.
->
-> **Ad-hoc** — genuinely unstructured, no documentation. Occasionally useful, not a strategy.
->
-> **End-to-end** — a complete user journey across systems, often including integrations.
->
-> **Alpha / Beta** — alpha is internal before release, beta is with real users in their environment.
->
-> ---
->
-> **The thing I'd add unprompted:**
->
-> The most useful classification in practice isn't functional versus non-functional — it's **what level should this test live at**. That decision affects speed, stability, and maintenance cost more than anything else, and it's where most suites go wrong."
+### Classic pairs
 
----
+**Smoke vs sanity**
 
-## The Classic Pairs
+- Smoke is shallow and wide: is the build worth testing?
+- Sanity is narrow and focused: does this specific change look okay?
 
-| | Smoke | Sanity |
-|---|---|---|
-| Depth | Shallow | Deep |
-| Breadth | Wide | Narrow |
-| When | Every build | After a specific fix |
-| Question | "Worth testing?" | "Does this fix work?" |
+**Regression vs retesting**
 
-| | Retesting | Regression |
-|---|---|---|
-| Target | The specific defect | Everything else |
-| Planned? | No — reactive | Yes — planned suite |
-| Automate? | Rarely | **Yes, primarily** |
-| Order | First | After retest passes |
+- Retesting proves the reported defect is fixed.
+- Regression proves existing behavior did not break because of the fix/change.
 
----
+**Functional vs non-functional**
 
-## Your Real Project Example (NielsenIQ)
+- Functional is "what the system does".
+- Non-functional is "how well the system does it".
 
-**How to frame it:**
+## 4. Manual Testing Angle
 
-> "Operationally, the split that matters to me is what gates a build versus what runs on a schedule. A fast smoke suite blocks the pipeline — if login or the main flows are broken, nothing else is worth running. Full regression runs on merge, and the slower cross-browser work runs nightly.
->
-> That tiering is the practical version of these categories, and it's what actually saves time — running less more often beats running everything rarely, and it's free compared with adding machines.
->
-> On regression versus retesting, the distinction I'd emphasize is that regression is what you automate. Retesting is targeted and reactive — you can't plan it, because you don't know what will need retesting until something fails. Regression is broad, repeated every release, and that repetition is exactly where automation compounds.
->
-> And I'd mention that exploratory testing stays in the strategy. Automation only checks what you thought to tell it to check — it structurally cannot find the thing you didn't anticipate. So the two aren't alternatives."
+Manual testing is strongest when the feature is new, changing, ambiguous, visual,
+business-heavy, or needs human judgement.
 
----
+Manual QA focus:
 
-## Common Interview Questions & Answers
+- Understand the story and acceptance criteria.
+- Identify positive, negative, boundary, role, permission, data, and integration cases.
+- Execute exploratory testing around new or risky behavior.
+- Observe usability, layout, confusing error messages, and unexpected side effects.
+- Capture evidence when behavior differs from expectation.
 
-### Q1: "Difference between smoke and sanity testing?"
+Manual testing is not "just clicking". It is risk discovery, requirement clarification,
+and release judgement.
 
-**A:** "Smoke is shallow and wide — does the build start, can you log in, do the main screens load. It answers whether the build is worth testing at all. Sanity is narrow and deep — a specific area after a specific fix. In practice a lot of teams use the terms interchangeably; what matters operationally is having a fast blocking suite and deeper suites that run less often."
+## 5. Automation Angle
 
-### Q2: "Regression vs retesting?"
+Automation is strongest when the check is repeated, stable, important, and has a clear
+expected result.
 
-**A:** "Retesting verifies the specific defect is fixed — same steps, same data, new build. Regression verifies everything *else* still works after the change. Retesting is reactive and can't be planned; regression is the planned suite, and it's what you automate because it repeats every release. Retesting comes first — no point running full regression if the fix doesn't work."
+Automate:
 
-### Q3: "What are the levels of testing?"
+- Smoke suite for CI gate.
+- Stable regression flows.
+- API validations for business rules.
+- Cross-browser smoke for critical flows.
+- Regression for repeated production or sprint defects.
 
-**A:** "Unit, integration, system, acceptance — scope increasing, isolation decreasing. The practical point is the test pyramid: most tests at the unit level, fewest end-to-end, because cost and fragility rise as you go up. The failure mode is an inverted pyramid where everything is E2E — slow, flaky, and expensive."
+Keep manual:
 
-### Q4: "Functional vs non-functional testing?"
+- Exploratory testing.
+- Usability judgement.
+- One-time checks.
+- Newly changing screens.
+- Ambiguous expected results.
 
-**A:** "Functional is what the system does — does login work, does the calculation come out right. Non-functional is how well — speed, load capacity, security, usability. Worth noting non-functional defects are often more expensive: a feature that works but takes eleven seconds to load passes functional testing cleanly and is still a real problem."
+Key trade-off:
 
-### Q5: "Is exploratory testing still relevant with automation?"
+> UI automation gives business confidence but costs more to maintain. Push logic checks
+> to API/component level when possible and keep E2E only for true user journeys.
 
-**A:** "Yes, and they're not alternatives. Automation checks what you told it to check — it can't find something you didn't anticipate. Exploratory testing finds that category, and it's structured investigation with a charter rather than random clicking. I'd keep it in the strategy alongside automation, not instead of it."
+## 6. Exact Surface To Remember
 
----
+- Smoke: "Is this build worth testing?"
+- Sanity: "Does this specific change look reasonable enough to continue?"
+- Retesting: "Same defect, same steps, fixed build."
+- Regression: "Everything else still works after the change."
+- Exploratory: "Structured investigation with a charter, not random clicking."
+- Test pyramid: "Most checks low, fewer checks high, because cost and flakiness increase upward."
 
-## Weak Areas to Watch
+## 7. Real Project Example
 
-❌ **Don't hesitate on smoke vs sanity**
-→ It's a warm-up. Fumbling it sets a bad tone early.
+In NielsenIQ work, position it like this:
 
-❌ **Don't say regression means "re-running the failed test"**
-→ That's retesting. Common confusion.
+> "I handle both manual and automation coverage. For a new feature, I first validate
+> requirements and run manual/exploratory checks because behavior may still change.
+> Once the flow stabilizes, I convert the repeated checks into automation. Fast smoke
+> flows go into CI, broader regression runs for release confidence, and exploratory
+> testing stays manual because automation only checks what we already predicted."
 
-❌ **Don't ignore the pyramid**
-→ Test level is the highest-leverage decision in a suite.
+## 8. Common Mistakes / Weak Areas
 
-❌ **Don't dismiss exploratory testing**
-→ It finds what automation structurally can't.
+- Saying smoke and sanity are exactly the same.
+- Saying regression means rerunning the failed test.
+- Saying everything should be automated.
+- Ignoring exploratory testing.
+- Putting every validation into UI automation.
+- Talking only textbook definitions without release strategy.
 
----
+## 9. 30-Second Answer
 
-## Key Takeaway for Interview
+Testing types describe the kind of risk, like functional, regression, smoke, usability,
+or performance. Testing levels describe the system scope, like unit, integration, system,
+and E2E. In real work I use these to decide what should be manual, what should be
+automated, and what should block a build. Regression is the main automation candidate,
+while exploratory and usability checks need human judgement.
 
-These are warm-ups. Answer cleanly and quickly, then add the operational reality.
+## 10. 2-Minute Answer
 
-The pair to have automatic:
+I separate the classification from the execution strategy. Smoke testing is a quick,
+wide build gate. Sanity is a focused check around a specific change. Retesting verifies
+the original defect is fixed, while regression checks that nearby or existing behavior
+has not broken.
 
-> **"Smoke asks whether the build is worth testing. Sanity asks whether one specific fix works."**
-> **"Retesting checks the defect is fixed. Regression checks everything else still works."**
+The level decision is where SDET judgement comes in. If a rule can be tested at API or
+component level, I do not push every case through the UI because that makes the suite
+slow and fragile. UI/E2E tests are reserved for critical user journeys. Manual testing
+still matters for new features, exploratory checks, usability, and unclear behavior.
+So manual and automation are not competing tracks; manual finds and shapes the risk,
+automation preserves the stable repeated checks.
 
-And the addition that shows judgement:
+## 11. Interview Q&A
 
-> **"The most useful classification isn't functional versus non-functional — it's what level a test should live at. That decision drives speed, stability, and maintenance cost more than anything else."**
+### Q: Smoke vs sanity?
 
----
+Smoke is shallow and wide. It checks whether the build is worth testing. Sanity is
+narrow and focused. It checks whether one specific fix or change looks reasonable.
 
-## Checklist
+### Q: Regression vs retesting?
 
-✅ Smoke vs sanity — instant, clean answer
-✅ Regression vs retesting — instant, and know which you automate
-✅ Four levels, and the pyramid rationale
-✅ Functional vs non-functional, with why NFR defects are expensive
-✅ Exploratory positioned as complementary, not obsolete
-✅ Can connect level choice to cost and stability
+Retesting verifies the specific defect is fixed. Regression verifies existing behavior
+still works after the change.
 
----
+### Q: Is exploratory testing still needed when automation exists?
 
-**Remember:** Warm-up questions are cheap to answer and expensive to fumble. 🎯
+Yes. Automation checks known expectations. Exploratory testing discovers unknown risks,
+requirement gaps, usability problems, and unexpected side effects.
+
+### Q: What should be automated first?
+
+Critical, stable, repeated flows with clear expected results: smoke, release regression,
+API validations, and repeated defect-prone areas.
+
+## 12. Quick Revision Points
+
+- Smoke = build worth testing.
+- Sanity = specific change is reasonable.
+- Retesting = same defect fixed.
+- Regression = existing behavior still works.
+- Automation preserves repeated known checks.
+- Manual testing discovers risk and gives judgement.

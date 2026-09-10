@@ -5,23 +5,63 @@ NOTE TEMPLATE
 TOPIC:
 
 1. WHAT IT IS
+- Plain-English definition
+- What problem it solves
+- Where it fits in the testing lifecycle
 
-2. WHY IT MATTERS
+2. WHY IT MATTERS IN INTERVIEWS
+- What the interviewer is really checking
+- What a weak answer sounds like
+- What a strong SDET answer adds
 
-3. INTERVIEW ANSWER - SHORT
+3. COMPLETE TOPIC BREAKDOWN
+- Main subtopics
+- Important terms and exact wording
+- When to use it
+- When not to use it
+- Trade-offs or limitations
 
-4. INTERVIEW ANSWER - DETAILED
+4. MANUAL TESTING ANGLE
+- Requirement/story analysis
+- Test scenarios and test cases
+- Test data and environment checks
+- Exploratory/risk-based thinking
+- Evidence, defect quality, and release confidence
 
-5. REAL PROJECT EXAMPLE
+5. AUTOMATION ANGLE
+- What is worth automating
+- What should stay manual
+- Best level: UI, API, DB, unit/component, or CI gate
+- Maintainability, flakiness, and data concerns
 
-6. COMMON QUESTIONS
-- 
-- 
-- 
+6. EXACT SURFACE TO REMEMBER
+- Commands, syntax, methods, config keys, annotations, locators, assertions, artifacts, or error wording
+- If there is no tool syntax, capture exact interview wording and artifacts
 
-7. QUICK REVISION POINTS
-- 
-- 
-- 
+7. REAL PROJECT EXAMPLE
+- BASES_PLAYWRIGHT example when the topic maps to Playwright/current work
+- CIP_LEGACY example when the topic maps to Selenium/Java/API/DB/legacy work
+- Keep it honest: no invented tools, no invented metrics
+
+8. COMMON MISTAKES / WEAK AREAS
+- Interview traps
+- Practical mistakes
+- Overclaiming risk
+
+9. 30-SECOND ANSWER
+- Quick answer for warm-up or screening rounds
+
+10. 2-MINUTE ANSWER
+- Deeper answer with reasoning, trade-off, and project connection
+
+11. INTERVIEW Q&A
+- Common questions
+- Follow-up questions interviewer may ask immediately
+- Short but complete answers
+
+12. QUICK REVISION POINTS
+- Last-hour bullets
+- One line that must land
+- Recall drill: read -> close -> speak
 
 ==========================================================

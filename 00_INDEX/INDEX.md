@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**132 notes** · Last updated: 2026-08-25
+**138 notes** · Last updated: 2026-09-10
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -47,6 +47,7 @@ Each cross-references the other two.
 | Round | Read |
 |---|---|
 | QA fundamentals / warm-ups | `01_TESTING_FUNDAMENTALS` |
+| Manual QA depth / release confidence | `01_TESTING_FUNDAMENTALS/09` to `01_TESTING_FUNDAMENTALS/14` |
 | Technical — Playwright | `02_PLAYWRIGHT` |
 | Technical — Selenium/Java | `03_SELENIUM_JAVA` |
 | Scenario / problem-solving | `04_TEST_ENGINEERING` |
@@ -59,21 +60,28 @@ Each cross-references the other two.
 
 ---
 
-## 01_TESTING_FUNDAMENTALS (8) ✅
+## 01_TESTING_FUNDAMENTALS (14) ✅
 
-Foundation. These are the **warm-up questions** — asked first in an interview, cheap to
-answer, expensive to fumble. ISTQB CTFL on the resume makes them fair game.
+Foundation. These are the **manual + automation QA base notes** — asked first in an
+interview, cheap to answer, expensive to fumble. ISTQB CTFL and 3.8+ years across
+manual + automation testing make them fair game.
 
 | # | Note | Covers |
 |---|------|--------|
-| 01 | Types & Levels Of Testing | **Smoke vs sanity**, **regression vs retesting**, test pyramid |
-| 02 | Principles & Terminology | 7 ISTQB principles, error/defect/failure, verification vs validation |
-| 03 | Test Design Techniques | EP, BVA, decision tables, state transition |
-| 04 | STLC & Test Artifacts | Phases, strategy vs plan, scenario vs case, RTM |
-| 05 | Defect Lifecycle & Reporting | **Severity vs priority**, actionable bug reports |
-| 06 | White-Box Testing | Coverage criteria, why 100% statement coverage is weak |
-| 07 | Performance Testing | **Load vs stress vs spike**, percentiles, saturation curve |
-| 08 | Security, Usability & Accessibility | **IDOR**, what automates vs needs humans |
+| 01 | Types & Levels Of Testing | **Smoke vs sanity**, **regression vs retesting**, test pyramid, manual vs automation selection |
+| 02 | Principles & Terminology | 7 ISTQB principles, QA/QC/testing, error/defect/failure, verification vs validation |
+| 03 | Test Design Techniques | EP, BVA, decision tables, state transition, exploratory charters, automation conversion |
+| 04 | STLC & Test Artifacts | Phases, strategy vs plan, scenario vs case, RTM, Agile QA artifacts |
+| 05 | Defect Lifecycle & Reporting | **Severity vs priority**, actionable bug reports, evidence, automation-failure triage |
+| 06 | White-Box Testing | Coverage criteria, black/white/grey-box framing, why 100% coverage is weak |
+| 07 | Performance Testing | **Load vs stress vs spike**, percentiles, manual performance risk observation |
+| 08 | Security, Usability & Accessibility | **IDOR**, auth/authz, usability/accessibility checks, what automates vs needs humans |
+| 09 | Requirement Analysis & Testability | AC clarity, ambiguity, testability questions, automation-ready expected results |
+| 10 | Test Scenarios, Cases & Checklists | Scenario vs case vs checklist, case fields, Agile documentation depth |
+| 11 | Test Data & Environment | Valid/invalid/boundary data, roles, environment checks, automation data stability |
+| 12 | Exploratory & Risk-Based Testing | Charters, time boxes, risk = impact x likelihood, automation candidates |
+| 13 | Manual Test Execution & Evidence | Pass/fail/blocked, screenshots/logs/API evidence, intermittent defects |
+| 14 | Release Readiness & Sign-Off | Test summary, known risks, blockers, ready/ready-with-risk/not-ready recommendation |
 
 ---
 
@@ -276,7 +284,7 @@ third-party PDFs stay on disk, out of version control.
 | `Office_Projects/PlaywrightTS/` | Internal NielsenIQ repo guide — never leaves the machine |
 
 Read from it, never copy from it. Anything worth keeping gets rewritten into the
-8-section format in his own words. See `09_EXTERNAL_REFS/README.md`.
+topic-first format in his own words. See `09_EXTERNAL_REFS/README.md`.
 
 ---
 
@@ -378,7 +386,7 @@ assertions, coverage, and release confidence.
 
 | Metric | Value | Belongs to |
 |--------|-------|-----------|
-| Total experience | 3.6+ years | — |
+| Total experience | 3.8+ years across manual + automation testing | — |
 | Automated scenarios | 300+ | CIP_LEGACY |
 | Regression coverage | 90% | NielsenIQ overall |
 | CI/CD feedback loop | **40 → 12 min** | BASES_PLAYWRIGHT |
@@ -393,9 +401,11 @@ Metrics appear in ~11 notes only — never scatter them further.
 
 ## Note Format
 
-Every note follows:
-1. What it is · 2. Why it matters · 3. 30-second answer · 4. 2-minute answer
-5. Real project example · 6. Interview Q&A · 7. Weak areas · 8. Key takeaway
+Every note now follows topic-first learning:
+1. What it is · 2. Why it matters in interviews · 3. Complete topic breakdown
+4. Manual testing angle · 5. Automation angle · 6. Exact surface to remember
+7. Real project example · 8. Common mistakes / weak areas · 9. 30-second answer
+10. 2-minute answer · 11. Interview Q&A · 12. Quick revision points
 
 Plus comparison tables, checklists, and code patterns where useful.
 Template: `00_INDEX/NOTE_TEMPLATE.txt`

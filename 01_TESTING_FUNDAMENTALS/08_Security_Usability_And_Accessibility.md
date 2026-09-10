@@ -1,212 +1,142 @@
 # Security, Usability, Compatibility & Accessibility
 
-## What This Covers
+## 1. What It Is
 
-The non-functional areas beyond performance — what each checks, which parts an SDET realistically owns, and which need specialists or real users.
+These are non-functional quality areas. They check whether the system is safe, usable,
+accessible, and reliable across supported browsers/devices.
 
----
+## 2. Why It Matters In Interviews
 
-## Why It Matters (Interview Context)
+Manual + automation QA roles often ask what non-functional checks you can cover. The
+right answer is honest: you can cover QA/SDET-level risks and involve specialists for
+deep security or performance work.
 
-These get asked as a set — *"what other non-functional testing do you do?"* — and the honest answer is more valuable than an exhaustive one.
+## 3. Complete Topic Breakdown
 
-**Security is the one worth being precise about.** There's a meaningful slice you genuinely own as an SDET (authorization testing), and a slice that's a specialist discipline (penetration testing). Claiming the second collapses immediately; claiming the first well is a differentiator, because plenty of automation engineers never test authorization at all.
+| Area | What it checks |
+|------|----------------|
+| Security | Unauthorized access, unsafe input, data exposure |
+| Usability | Ease of completing real user tasks |
+| Accessibility | Usability for people with disabilities |
+| Compatibility | Supported browsers, OS, devices |
+| Responsive testing | Layout and behavior across screen sizes |
 
-The accessibility angle has a nice connection to your locator strategy that's worth raising unprompted.
+### Security basics
 
----
+| Risk | Meaning | QA check |
+|------|---------|----------|
+| Authentication | Who are you? | Login/logout/session expiry |
+| Authorization | What can you access? | Role permissions |
+| IDOR | Access object by changing ID | Try another user's record ID |
+| Input validation | Unsafe/invalid input accepted | Boundary/special characters |
+| Session handling | Token/session misuse | Back after logout, expiry |
+| Data exposure | Sensitive data visible | UI/API/log review where allowed |
 
-## Your 30-Second Interview Answer
+### Usability checks
 
-> "Security testing at my level means authorization — same API call as a different role should return 403, changing a resource ID in a request shouldn't leak another user's data, tokens should actually expire. Those belong in the automated API suite. Penetration testing is a specialist discipline and I wouldn't claim it. Accessibility I integrate with axe, which catches the mechanical half automatically — and there's a useful overlap where role-based locators surface real accessibility defects as a side effect. Usability genuinely needs real users; it isn't automatable."
+- Is the primary action clear?
+- Are labels and messages understandable?
+- Can user recover from mistakes?
+- Are required fields clear?
+- Are error messages useful?
+- Does the flow work with realistic data?
 
----
+### Accessibility checks
 
-## Your 2-Minute Deep Answer
+- Keyboard navigation.
+- Visible focus.
+- Proper labels.
+- Error messages near fields.
+- Color contrast.
+- Meaningful accessible names.
 
-> "**SECURITY — where the SDET line actually sits:**
->
-> The OWASP Top 10 is the reference point. The categories that matter most in practice:
->
-> - **Broken access control** — can a user reach another user's data?
-> - **Broken authentication** — do sessions and tokens behave correctly?
-> - **Injection** — SQL, command, script
-> - **Sensitive data exposure** — is anything leaking in responses or logs?
-> - **Security misconfiguration** — default credentials, verbose errors, open endpoints
->
-> **What I genuinely own — authorization testing in the API suite:**
->
-> ```
-> Same endpoint, different role         → 403, not 200
-> Change resource ID in the request     → 403/404, not another user's data
-> Expired token                          → 401
-> No token                               → 401
-> Valid token, insufficient permission   → 403 (not 401)
-> ```
->
-> That **IDOR** case — insecure direct object reference — is the one worth naming. Change `/api/orders/1234` to `/api/orders/1235` and see whether you get someone else's order. It's a straightforward automated check and it catches a genuinely serious class of bug that functional testing walks straight past, because the happy path never tries it.
->
-> The **401 vs 403** distinction matters here too. Returning 401 for a permissions problem sends the client into a pointless re-authentication loop — and in a UI with automatic token refresh, that can be an infinite loop.
->
-> **What I wouldn't claim:** penetration testing, threat modelling, deep vulnerability assessment. Different discipline. What I'd add is that dependency scanning — Snyk, Dependabot, `npm audit` — is cheap to wire into CI and catches known CVEs in libraries without any security expertise.
->
-> ---
->
-> **USABILITY — the honest limit:**
->
-> Can real users accomplish their goal without confusion? This is genuinely **not automatable**, because automation checks what you told it to check, and *"is this flow confusing"* isn't expressible as an assertion.
->
-> It needs real users doing real tasks while someone observes. What automation can contribute is the mechanical adjacent checks — are error messages present and specific, is there a loading state, does the back button work.
->
-> Saying clearly that this needs humans is better than pretending otherwise.
->
-> ---
->
-> **COMPATIBILITY:**
->
-> Browsers and versions, operating systems, screen sizes, devices.
->
-> This is where cross-browser automation earns its place — but I'd **tier** it. Full cross-browser on every commit is expensive for the value it returns. Nightly or pre-release is usually the right cadence, with the primary browser on every run.
->
-> **Responsive breakpoints are under-tested.** A layout that works at 1920px and collapses at 768px passes every desktop test you have. Playwright makes this cheap:
->
-> ```typescript
-> test.use({ viewport: { width: 375, height: 812 } });
-> ```
->
-> Worth having a small suite that runs the critical flows at mobile width, because that's where real users are.
->
-> ---
->
-> **ACCESSIBILITY:**
->
-> WCAG compliance — screen reader support, keyboard navigation, colour contrast, focus order, semantic structure.
->
-> **What automates well** (roughly the mechanical half): missing alt text, insufficient colour contrast, missing form labels, invalid ARIA, missing page landmarks. Tools like **axe** integrate directly:
->
-> ```typescript
-> const results = await new AxeBuilder({ page }).analyze();
-> expect(results.violations).toEqual([]);
-> ```
->
-> **What doesn't automate:** whether the screen reader experience actually makes sense, whether focus order is logical, whether alt text is *meaningful* rather than merely present. `alt="image1"` passes an automated check and helps nobody.
->
-> **The connection worth raising unprompted:**
->
-> Role-based locators and accessibility overlap directly. If `getByRole('button', { name: 'Submit' })` can't find your element, that's often a **genuine accessibility defect** — the element isn't exposing a proper role or accessible name. A screen reader user would hit the same wall.
->
-> So writing accessible-first locators surfaces real accessibility issues as a by-product, rather than as a separate effort. That's a nice example of a testing practice producing a product-quality outcome, and it's the kind of connection interviewers remember.
->
-> ---
->
-> **Where these fit in the strategy:**
->
-> Automated in the suite: authorization, accessibility (mechanical), responsive breakpoints, dependency scanning.
->
-> Specialist or manual: penetration testing, usability, screen reader experience.
->
-> Being clear about which is which is the answer — an exhaustive claim to cover all of it wouldn't be credible."
+## 4. Manual Testing Angle
 
----
+Manual testing is essential here.
 
-## What Automates, What Doesn't
+- Security: role checks, session behavior, obvious unauthorized access attempts.
+- Usability: human judgement about clarity, effort, confusion, and recovery.
+- Accessibility: keyboard flow, focus, labels, contrast observation.
+- Compatibility: actual browser/device behavior and layout.
+- Responsive: menus, tables, modals, filters, and forms at different sizes.
 
-| Area | Automatable | Owned by SDET? |
-|------|:---:|:---:|
-| Authorization / IDOR | ✅ Fully | ✅ Yes |
-| Dependency CVEs | ✅ Fully | ✅ Yes (CI) |
-| Injection | ⚠️ Partly | ⚠️ Basic cases |
-| Penetration testing | ❌ | ❌ Specialist |
-| Accessibility — mechanical | ✅ axe | ✅ Yes |
-| Accessibility — experience | ❌ | ❌ Needs users |
-| Responsive breakpoints | ✅ | ✅ Yes |
-| Cross-browser | ✅ | ✅ Yes (tiered) |
-| Usability | ❌ | ❌ Needs users |
+## 5. Automation Angle
 
----
+Automation can support these areas, but cannot fully replace judgement.
 
-## Your Real Project Example (NielsenIQ)
+- Automate stable role-based access checks.
+- Automate critical cross-browser smoke flows.
+- Add API negative checks for forbidden/unauthorized access.
+- Use accessibility scans where available, but treat them as partial coverage.
+- Use viewport-based checks for critical responsive flows.
 
-**How to frame it:**
+Do not overclaim deep penetration testing. Say:
 
-> "The security slice I genuinely own is authorization, as part of API validation. Same endpoint called as a different role should return 403 rather than 200. Changing a resource ID in the request shouldn't return someone else's data — that's the IDOR case, and it's a simple automated check that catches a serious class of bug functional testing walks past entirely, because the happy path never tries it.
->
-> I'd be clear that penetration testing isn't mine. What I'd add is that dependency scanning in CI is cheap and catches known CVEs in libraries without needing security expertise.
->
-> On accessibility, the connection I find genuinely useful is that role-based locators overlap with it. If `getByRole` can't find an element by its accessible name, that's often a real accessibility defect — the element isn't exposing a role or label, and a screen reader user hits the same wall. So accessible-first locators surface those issues as a by-product rather than as a separate initiative. It's a case where a testing practice produces a product-quality outcome.
->
-> And I'd say plainly that usability isn't automatable. Automation checks what you told it to check — 'is this confusing' isn't an assertion. That needs real users, and pretending otherwise would be wrong."
+> "I cover security from a QA/SDET angle: auth/authz, role access, input validation,
+> session behavior, and regression for sensitive flows. For deep penetration testing,
+> I would involve security specialists."
 
----
+## 6. Exact Surface To Remember
 
-## Common Interview Questions & Answers
+- Authentication = identity.
+- Authorization = permission.
+- IDOR = changing object ID should not expose another user's data.
+- Accessibility automation catches some issues, not all user experience.
+- Usability is mostly human judgement.
+- Compatibility should follow supported browser matrix.
 
-### Q1: "What security testing do you do?"
+## 7. Real Project Example
 
-**A:** "Authorization, in the API suite — same call as a different role returns 403, changing a resource ID doesn't leak another user's data, tokens actually expire. The IDOR check is the valuable one: change the ID in the URL and see whether you get someone else's record. Penetration testing is a specialist discipline and I wouldn't claim it, though dependency scanning in CI is cheap and worth having."
+> "For manual testing, I validate role access, error messages, keyboard usability,
+> supported browser behavior, and responsive layout for important flows. For automation,
+> I would keep stable permission checks and cross-browser smoke flows. I would not claim
+> automation fully proves usability or accessibility."
 
-### Q2: "What's IDOR?"
+## 8. Common Mistakes / Weak Areas
 
-**A:** "Insecure direct object reference — changing an identifier in a request to access something you shouldn't. `/api/orders/1234` becomes `/api/orders/1235` and you get another customer's order. It's easy to automate and it catches a serious bug class, because the functional happy path never attempts it."
+- Confusing authentication and authorization.
+- Overclaiming security expertise.
+- Saying accessibility can be fully automated.
+- Testing only Chrome if product supports more browsers.
+- Treating usability as cosmetic only.
+- Ignoring responsive tables, filters, and modals.
 
-### Q3: "Can accessibility testing be automated?"
+## 9. 30-Second Answer
 
-**A:** "The mechanical half — axe catches missing alt text, contrast failures, missing labels, invalid ARIA. What it can't catch is whether the experience makes sense: whether focus order is logical, or whether alt text is meaningful rather than just present. `alt='image1'` passes automated checks and helps nobody."
+Security checks whether access and data are protected, usability checks whether users can
+complete work easily, accessibility checks whether the product works for users with
+different needs, and compatibility checks supported browsers/devices. I cover these from
+a QA/SDET angle and automate stable checks where possible.
 
-### Q4: "How do you handle cross-browser and responsive testing?"
+## 10. 2-Minute Answer
 
-**A:** "Tiered — primary browser on every run, full cross-browser nightly or pre-release, because running everything everywhere on every commit is expensive for the value. Responsive breakpoints are the under-tested part: a layout that works at 1920px and collapses at 768px passes every desktop test. A small mobile-viewport suite over the critical flows is worth having."
+For security, I focus on auth/authz, role access, session handling, input validation, and
+data exposure risks. For usability, I check whether the flow is understandable and users
+can recover from mistakes. For accessibility, I check keyboard navigation, focus, labels,
+contrast, and error messages. For compatibility, I follow the supported browser/device
+matrix and prioritize critical flows. Automation can help with stable permission checks,
+API negative checks, accessibility scans, and cross-browser smoke, but human judgement is
+still required.
 
-### Q5: "Why isn't usability testing automatable?"
+## 11. Interview Q&A
 
-**A:** "Because automation only checks what you thought to tell it, and 'is this confusing' isn't expressible as an assertion. It needs real users doing real tasks with someone watching. Automation can cover the adjacent mechanical things — are error messages present and specific, is there a loading state — but not the judgement."
+### Q: Authentication vs authorization?
 
----
+Authentication verifies identity. Authorization verifies permission.
 
-## Weak Areas to Watch
+### Q: What is IDOR?
 
-❌ **Don't claim penetration testing**
-→ Specialist discipline. The authorization slice is yours; say that.
+Insecure Direct Object Reference: changing an object ID should not allow access to
+another user's data.
 
-❌ **Don't say accessibility is fully automatable**
-→ Tools catch the mechanical half. Meaningful alt text isn't checkable.
+### Q: Can accessibility be fully automated?
 
-❌ **Don't claim usability can be automated**
-→ It can't, and saying so honestly is stronger.
+No. Automation catches some rule violations, but keyboard flow, clarity, and real user
+experience still need manual judgement.
 
-❌ **Don't run full cross-browser on every commit**
-→ Expensive for the value. Tier it.
+## 12. Quick Revision Points
 
-❌ **Don't skip responsive breakpoints**
-→ Desktop tests are blind to mobile layout collapse.
-
----
-
-## Key Takeaway for Interview
-
-Precision about what you own beats an exhaustive claim.
-
-The security slice worth naming:
-
-> **"Authorization testing in the API suite — same call as a different role returns 403, and the IDOR check: change the resource ID and see whether you get someone else's data. Functional testing walks past that entirely, because the happy path never tries it."**
-
-And the connection worth raising unprompted:
-
-> **"If `getByRole` can't find an element by its accessible name, that's often a genuine accessibility defect — a screen reader user hits the same wall. Accessible-first locators surface those issues as a by-product."**
-
----
-
-## Checklist
-
-✅ Authorization tested across roles in the API suite
-✅ IDOR checks on resource-ID endpoints
-✅ 401 vs 403 distinction verified
-✅ Dependency scanning wired into CI
-✅ axe integrated for mechanical accessibility
-✅ Responsive breakpoint suite over critical flows
-✅ Cross-browser tiered, not every commit
-✅ Honest boundaries: no penetration testing, no automated usability
-
----
-
-**Remember:** `alt="image1"` passes the automated check and helps nobody. 🎯
+- Auth = identity, authz = permission.
+- IDOR = object ID access risk.
+- Usability/accessibility need human judgement.
+- Automate support checks, not full judgement.

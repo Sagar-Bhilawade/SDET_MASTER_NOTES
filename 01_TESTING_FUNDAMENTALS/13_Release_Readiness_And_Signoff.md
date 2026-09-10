@@ -18,6 +18,7 @@ Release readiness considers:
 - Scope tested.
 - Scope not tested.
 - Passed/failed/blocked cases.
+- Evidence available for critical flows and open defects.
 - Open critical/high defects.
 - Deferred defects and risk.
 - Regression result.
@@ -32,6 +33,7 @@ Release readiness considers:
 - Build/version.
 - Feature/release scope.
 - Test summary.
+- Evidence summary for critical manual checks, defects, and automation failures.
 - Defect summary.
 - Blockers.
 - Known risks.
@@ -46,6 +48,7 @@ Manual QA gives risk-based recommendation:
 - What exploratory risks were found?
 - What remains uncertain?
 - Are critical workflows acceptable?
+- Is there evidence for critical flows, open defects, and blocked scope?
 - Are known defects acceptable for release?
 - Is there enough evidence for confidence?
 
@@ -73,18 +76,21 @@ are unresolved.
 - "All passed" is not enough without scope.
 - Ready with risk means known issues are accepted.
 - Blocked scope must be visible.
+- Evidence should support the recommendation, especially for critical flows and open
+  defects.
 
 ## 7. Real Project Example
 
 > "For release readiness, I would summarize tested scope, manual/exploratory result,
-> automation/regression result, open defects, blockers, and remaining risk. If critical
-> flows are stable but a low-impact issue is deferred, I would call it ready with known
-> risk, not simply 'all good'."
+> automation/regression result, evidence for critical flows, open defects, blockers, and
+> remaining risk. If critical flows are stable but a low-impact issue is deferred, I would
+> call it ready with known risk, not simply 'all good'."
 
 ## 8. Common Mistakes / Weak Areas
 
 - Saying QA alone approves release.
 - Giving sign-off without scope.
+- Giving sign-off without evidence.
 - Hiding blocked tests.
 - Ignoring automation failures.
 - Ignoring known defects.
@@ -94,15 +100,17 @@ are unresolved.
 
 Release readiness is a risk-based QA recommendation. I summarize tested scope, passed,
 failed, blocked items, open defects, regression/automation result, known risks, and
-whether the release is ready, ready with risk, or not ready.
+evidence for important flows, then state whether the release is ready, ready with risk,
+or not ready.
 
 ## 10. 2-Minute Answer
 
 I do not treat sign-off as just "tests passed". I check what was in scope, what was not
 tested, what defects remain, whether critical flows passed, whether automation/regression
-ran on the right build, and whether any blockers or environment limitations exist. Then I
-communicate the recommendation with risk. If risk is accepted by stakeholders, release
-can proceed. If critical functionality is broken or untested, I recommend not ready.
+ran on the right build, what evidence supports the result, and whether any blockers or
+environment limitations exist. Then I communicate the recommendation with risk. If risk
+is accepted by stakeholders, release can proceed. If critical functionality is broken or
+untested, I recommend not ready.
 
 ## 11. Interview Q&A
 
@@ -118,5 +126,6 @@ Testing found known issues, but stakeholders accept the impact/workaround/timeli
 ## 12. Quick Revision Points
 
 - Sign-off = scope + result + risk + recommendation.
+- Evidence supports confidence; it is not a separate topic to over-study.
 - QA informs release decision.
 - Green automation alone is not release readiness.

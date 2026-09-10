@@ -43,6 +43,10 @@ and communicate impact clearly.
 - Frequency.
 - Business/user impact.
 
+Good evidence should make the issue reproducible without a long call. Depending on the
+defect, that can mean screenshot/video, console or network logs, API response, downloaded
+file, timestamp, build/version, user/role, and exact test data.
+
 ## 4. Manual Testing Angle
 
 Manual QA owns reproduction quality.
@@ -52,6 +56,8 @@ Manual QA owns reproduction quality.
 - Capture exact data and environment.
 - Use clear expected vs actual result.
 - Mention impact, not emotion.
+- For intermittent issues, capture frequency, timestamp, data, user, build, and the
+  pattern you observed.
 - Retest the exact fix first, then run impacted regression.
 
 If developer says "not reproducible", improve evidence: build, user, data, timestamp,
@@ -82,6 +88,8 @@ test if the expected result is stable.
 - Retesting = specific fix verification.
 - Regression = impact check around the fix.
 - Good bug report = reproducible, specific, evidenced, impact-aware.
+- Pass = expected result met; fail = expected result not met; blocked = cannot execute
+  because of a dependency such as environment, data, access, or build.
 
 ## 7. Real Project Example
 
@@ -124,6 +132,11 @@ Severity is the impact of the defect. Priority is how urgently it should be fixe
 
 Recheck build/data/steps, reproduce again, add stronger evidence, logs/timestamp if
 available, and discuss with developer using facts.
+
+### Q: What does blocked mean?
+
+Blocked means the test could not be executed because a dependency is unavailable, such as
+environment down, missing data, access issue, or build not ready.
 
 ### Q: Should every defect be automated later?
 

@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**138 notes** · Last updated: 2026-09-10
+**137 notes** · Last updated: 2026-09-10
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -47,7 +47,7 @@ Each cross-references the other two.
 | Round | Read |
 |---|---|
 | QA fundamentals / warm-ups | `01_TESTING_FUNDAMENTALS` |
-| Manual QA depth / release confidence | `01_TESTING_FUNDAMENTALS/09` to `01_TESTING_FUNDAMENTALS/14` |
+| Manual QA depth / release confidence | `01_TESTING_FUNDAMENTALS/09` to `01_TESTING_FUNDAMENTALS/13` |
 | Technical — Playwright | `02_PLAYWRIGHT` |
 | Technical — Selenium/Java | `03_SELENIUM_JAVA` |
 | Scenario / problem-solving | `04_TEST_ENGINEERING` |
@@ -60,7 +60,7 @@ Each cross-references the other two.
 
 ---
 
-## 01_TESTING_FUNDAMENTALS (14) ✅
+## 01_TESTING_FUNDAMENTALS (13) ✅
 
 Foundation. These are the **manual + automation QA base notes** — asked first in an
 interview, cheap to answer, expensive to fumble. ISTQB CTFL and 3.8+ years across
@@ -80,8 +80,7 @@ manual + automation testing make them fair game.
 | 10 | Test Scenarios, Cases & Checklists | Scenario vs case vs checklist, case fields, Agile documentation depth |
 | 11 | Test Data & Environment | Valid/invalid/boundary data, roles, environment checks, automation data stability |
 | 12 | Exploratory & Risk-Based Testing | Charters, time boxes, risk = impact x likelihood, automation candidates |
-| 13 | Manual Test Execution & Evidence | Pass/fail/blocked, screenshots/logs/API evidence, intermittent defects |
-| 14 | Release Readiness & Sign-Off | Test summary, known risks, blockers, ready/ready-with-risk/not-ready recommendation |
+| 13 | Release Readiness & Sign-Off | Test summary, evidence, known risks, blockers, ready/ready-with-risk/not-ready recommendation |
 
 ---
 

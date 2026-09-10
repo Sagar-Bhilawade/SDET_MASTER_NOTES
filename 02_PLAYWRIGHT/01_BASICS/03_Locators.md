@@ -56,6 +56,41 @@ await page
   .click();
 ```
 
+Advanced filters and operators:
+
+```typescript
+await page.getByRole('listitem').filter({ hasText: 'Product 2' });
+await page.getByRole('listitem').filter({ hasNotText: 'Out of stock' });
+await page.getByRole('listitem').filter({
+  has: page.getByRole('heading', { name: 'Product 2' })
+});
+await page.getByRole('listitem').filter({
+  hasNot: page.getByText('Archived')
+});
+```
+
+```typescript
+const subscribeButton = page
+  .getByRole('button')
+  .and(page.getByTitle('Subscribe'));
+
+const newButton = page.getByRole('button', { name: 'New' });
+const securityDialog = page.getByText('Confirm security settings');
+await expect(newButton.or(securityDialog).first()).toBeVisible();
+```
+
+List and visibility handling:
+
+```typescript
+await expect(page.getByRole('listitem')).toHaveCount(3);
+await expect(page.getByRole('listitem')).toHaveText(['apple', 'banana', 'orange']);
+await page.getByRole('listitem').nth(1).click();
+await page.locator('button').filter({ visible: true }).click();
+```
+
+Use `first()`, `last()`, `nth()`, and visible filters carefully. They can hide locator
+ambiguity if a better user-facing locator exists.
+
 ### Strict mode
 
 If an action locator matches multiple elements, Playwright fails instead of guessing.
@@ -97,6 +132,14 @@ await page.getByRole('button', { name: /submit/i }).click();
 await page.locator('article', {
   has: page.getByRole('heading', { name: 'Billing' })
 });
+```
+
+```typescript
+await page
+  .getByRole('listitem')
+  .filter({ hasNotText: 'Out of stock' })
+  .getByRole('button', { name: 'Buy' })
+  .click();
 ```
 
 Config custom test id:
@@ -162,10 +205,22 @@ wants an explicit automation contract.
 
 Scope to the row/card first, then locate the button inside it.
 
+### Q: When would you use `or()` locator?
+
+When either of two states may appear, such as the expected button or a security dialog.
+If both appear, it can still cause strict mode, so handle that deliberately.
+
+### Q: Is `nth()` bad?
+
+Not always, but it is fragile if order can change. Use it only when position/order is
+itself the behavior or no better unique locator exists.
+
 ## 12. Quick Revision Points
 
 - Locator is lazy.
 - Role/name is usually best.
 - Test id is stable but less user-facing.
 - Strict mode is useful.
+- `has`, `hasNot`, `hasText`, `hasNotText`, `and`, `or` are important follow-up syntax.
+- `first/last/nth` are fallback tools, not locator strategy.
 - CSS/XPath are fallback.

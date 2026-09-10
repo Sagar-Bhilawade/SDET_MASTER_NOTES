@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**140 notes** · Last updated: 2026-09-10
+**141 notes** · Last updated: 2026-09-10
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -84,9 +84,9 @@ manual + automation testing make them fair game.
 
 ---
 
-## 02_PLAYWRIGHT — Track 1 (39) 🚧
+## 02_PLAYWRIGHT — Track 1 (40) 🚧
 
-### 01_BASICS (12) ✅
+### 01_BASICS (13) ✅
 | # | Note | Covers |
 |---|------|--------|
 | 01 | What Is Playwright | Runner + browser automation + assertions + artifacts; honest Selenium/Cypress contrast |
@@ -101,6 +101,7 @@ manual + automation testing make them fair game.
 | 10 | Navigation And Events | `goto`, URL/load-state waits, popup/download/request/response event pre-wait |
 | 11 | Emulation, Devices, And Permissions | device presets, viewport, locale/timezone, permissions, geolocation, browser matrix |
 | 12 | Clock And Time-Dependent Testing | browser clock control, date/timer testing, browser-time vs server-time boundary |
+| 13 | Page Evaluate, Handles, And Init Scripts | browser-vs-test context, page/locator evaluate, JSHandle, init scripts, bypass risk |
 
 ### 02_FRAMEWORK (12)
 | # | Note | Covers |

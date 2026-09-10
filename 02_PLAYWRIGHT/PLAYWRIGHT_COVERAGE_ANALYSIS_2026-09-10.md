@@ -244,6 +244,14 @@ Add:
    - risk of hiding real integration behavior
    - examples: token expiry, countdowns, date filters
 
+4. `13_Page_Evaluate_Handles_And_Init_Scripts.md`
+   - browser context vs Node.js test context
+   - `page.evaluate` and explicit argument passing
+   - `locator.evaluate` for element-specific inspection
+   - `evaluateHandle` and `JSHandle`
+   - `page.addInitScript` / `context.addInitScript`
+   - risk of bypassing real user behavior
+
 ### `02_FRAMEWORK`
 
 Add:
@@ -310,9 +318,9 @@ These exist in official docs, but should not become core notes unless a JD asks.
 
 ## Proposed Final Playwright Shape
 
-After approval, update the Playwright section to about 44 notes:
+After approval, update the Playwright section to about 45 notes:
 
-- `01_BASICS` - 12 notes
+- `01_BASICS` - 13 notes
 - `02_FRAMEWORK` - 16 notes
 - `03_API_TESTING` - 6 notes
 - `04_TYPESCRIPT` - 4 notes

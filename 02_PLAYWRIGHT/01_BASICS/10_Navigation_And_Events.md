@@ -19,6 +19,7 @@ experience.
 | URL assertion | `expect(page).toHaveURL()` | Verify navigation result |
 | Load state | `page.waitForLoadState()` | Wait for document/load state |
 | Popup | `page.waitForEvent('popup')` | New tab/window |
+| Any new page in context | `context.waitForEvent('page')` | `target="_blank"` or unknown opener |
 | Download | `page.waitForEvent('download')` | Export/download |
 | Dialog | `page.once('dialog')` | Alert/confirm/prompt |
 | Request | `page.waitForRequest()` | Verify request fired |
@@ -39,6 +40,15 @@ Use pre-wait for events that may happen immediately.
 const popupPromise = page.waitForEvent('popup');
 await page.getByRole('link', { name: 'Open report' }).click();
 const popup = await popupPromise;
+```
+
+When the new tab can be created anywhere inside the same browser context:
+
+```typescript
+const pagePromise = context.waitForEvent('page');
+await page.getByText('open new tab').click();
+const newPage = await pagePromise;
+await newPage.waitForLoadState();
 ```
 
 Trade-off: do not overuse `networkidle`. Modern apps may keep long polling or background
@@ -119,10 +129,17 @@ specific state.
 
 Start `page.waitForEvent('popup')`, click, then await the popup page and assert it.
 
+### Q: `page.waitForEvent('popup')` vs `context.waitForEvent('page')`?
+
+Use popup when the new page is opened by the current page. Use context page event when
+you need to catch any new page created in that browser context.
+
 ## 12. Quick Revision Points
 
 - Wait for signal, not time.
 - Event wait before action.
 - URL/content/response are better signals than sleep.
+- `popup` is page-specific; `context.waitForEvent('page')` catches any new page in the
+  context.
 - Use `page.once` for one-time events.
 - Be careful with `networkidle`.

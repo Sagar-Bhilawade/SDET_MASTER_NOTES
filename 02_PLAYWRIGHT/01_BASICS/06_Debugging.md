@@ -13,16 +13,16 @@ workflow using trace, screenshot, video, console/network evidence, and local rep
 
 ## 3. Complete Topic Breakdown
 
-| Tool | Use |
-|---|---|
-| Trace viewer | Replay actions, DOM snapshots, network, console, screenshots |
-| HTML report | See failed tests, retries, attachments |
-| Video | Watch visible browser behavior |
-| Screenshot | Capture final/failed state |
-| UI mode | Explore and debug locally |
-| Inspector/debug mode | Step through test |
-| Console/network logs | Separate frontend/API/environment problems |
-| Error message | Classify failure family |
+| Tool                 | Use                                                          |
+| -------------------- | ------------------------------------------------------------ |
+| Trace viewer         | Replay actions, DOM snapshots, network, console, screenshots |
+| HTML report          | See failed tests, retries, attachments                       |
+| Video                | Watch visible browser behavior                               |
+| Screenshot           | Capture final/failed state                                   |
+| UI mode              | Explore and debug locally                                    |
+| Inspector/debug mode | Step through test                                            |
+| Console/network logs | Separate frontend/API/environment problems                   |
+| Error message        | Classify failure family                                      |
 
 Debug order:
 

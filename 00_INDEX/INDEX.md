@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**141 notes** · Last updated: 2026-09-10
+**144 notes** · Last updated: 2026-09-10
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -350,7 +350,7 @@ The in-depth locator guide — CSS, XPath, and finding elements in practice. Int
 
 ---
 
-## 11_AI_IN_TESTING (9) ✅
+## 11_AI_IN_TESTING (12) 🚧
 
 AI-assisted QA workflows across the whole testing lifecycle. Separate from Playwright
 tooling because interviewers increasingly ask about AI end-to-end: Jira, PR review, test
@@ -369,6 +369,9 @@ assertions, coverage, and release confidence.
 | 07 | Review Gates For AI-Generated Tests | The 6-question gate; **"why does this exist?"**; fast green suite that proves nothing |
 | 08 | Context Management For QA Agents | Skills vs task context, agent handoff, scoped context, avoiding generic output |
 | 09 | Playwright CLI Agent Browser Exploration | CLI vs MCP, snapshots, refs, `find`, `generate-locator`, console/network commands |
+| 10 | AI In Testing Coverage Map And Study Plan | Full expansion map: AI basics, Copilot, models/modes, agents, Selenium usage, interview boundaries |
+| 11 | VS Code And GitHub Copilot For SDET | Ask/Edit/Agent/Plan modes, custom agents, prompt files, skills, MCP, safe daily workflow |
+| 12 | Copilot Context, MCP, And Skill Files For QA | Context ladder, instructions, references, `.agent.md`, `.prompt.md`, `SKILL.md`, MCP safety |
 
 ---
 
@@ -376,12 +379,15 @@ assertions, coverage, and release confidence.
 
 | Gap | Priority | Notes needed |
 |-----|:---:|:---:|
+| **AI in Testing expanded library** | 🔴 High | 8 |
+| └ Add AI basics for QA, prompting patterns, QA agents, test data/environment, debugging/failure analysis, Selenium/Java/RestAssured usage, AI risks/privacy, interview Q&A bank, and quick revision | | |
 | **Gauge, Python** | ⚪ Deferred | — |
 | └ On the resume; Sagar's call to revisit later | | |
 
-> Learning arc, interview-prep, practical rounds, and the revision layer are all built.
-> Remaining work is maintenance: keep `08_QUICK_REVISION/00_Weak_Spots.md` current after
-> every session and interview, and add notes for any real-interview question the arc misses.
+> Learning arc, interview-prep, practical rounds, and the revision layer are strong.
+> AI in Testing is being expanded because the interview market now probes it deeply:
+> Copilot usage, agents, model/mode vocabulary, context control, safe automation drafting,
+> privacy boundaries, and honest tool claims.
 
 ---
 

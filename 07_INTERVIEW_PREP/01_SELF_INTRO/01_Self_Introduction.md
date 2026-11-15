@@ -16,7 +16,7 @@ The rule: **professional only, present-first, ending on why this role.** Nothing
 
 ## 30-second answer (the core)
 
-> "I'm an SDET with 3.8+ years at NielsenIQ across manual and automation testing. My current track is Playwright with TypeScript, where I work on UI E2E automation with API-assisted setup and cleanup, reusable fixtures, CI execution, and AI-assisted QA workflows. Before that I spent around two years on an enterprise Selenium and Java stack with RestAssured API validation, SQL checks, and Jenkins pipelines. I'm ISTQB CTFL and Azure AZ-900 certified, and I'm looking for an SDET role where I can own more of the automation strategy and quality engineering approach."
+> "I'm an SDET with 4+ years at NielsenIQ across manual and automation testing. My current track is Playwright with TypeScript, where I work on UI E2E automation with API-assisted setup and cleanup, reusable fixtures, CI execution, and AI-assisted QA workflows. Before that I spent around two years on an enterprise Selenium and Java stack with RestAssured API validation, SQL checks, and Jenkins pipelines. I'm ISTQB CTFL and Azure AZ-900 certified, and I'm looking for an SDET role where I can own more of the automation strategy and quality engineering approach."
 
 That's it. Memorize the shape, not the words.
 
@@ -26,7 +26,7 @@ That's it. Memorize the shape, not the words.
 
 Same spine, with one metric and one signature story hook added:
 
-> "I'm an SDET with 3.8+ years at NielsenIQ across manual and automation testing. My work splits into two tracks. The current one — since the start of 2025 — is a modern Playwright and TypeScript framework where I work on UI E2E automation, API-assisted test data setup and cleanup, reusable fixtures, and CI-ready execution. The headline result there was cutting the CI feedback loop from about 40 minutes down to 12, mostly through better parallel execution and removing wasted waits.
+> "I'm an SDET with 4+ years at NielsenIQ across manual and automation testing. My work splits into two tracks. The current one — since the start of 2025 — is a modern Playwright and TypeScript framework where I work on UI E2E automation, API-assisted test data setup and cleanup, reusable fixtures, and CI-ready execution. The headline result there was cutting the CI feedback loop from about 40 minutes down to 12, mostly through better parallel execution and removing wasted waits.
 >
 > Before that, my first two years were an enterprise Selenium and Java stack — 300-plus automated scenarios, RestAssured for the API layer, SQL for database validation, Jenkins pipelines. That's where I did the hard flakiness work and got the suite under 2% flaky on first attempt.
 >
@@ -40,7 +40,7 @@ Same spine, with one metric and one signature story hook added:
 
 | Piece | Why it's in the opener |
 |-------|------------------------|
-| "3.8+ years" | Establishes seniority band up front |
+| "4+ years" | Establishes seniority band up front |
 | Playwright **first** | Leads with the in-demand skill; mirrors most JDs |
 | "own framework design" | Signals you're not just a test-writer — the 20 LPA line |
 | One metric (40→12 or <2%) | Concrete, memorable, verifiable against the resume |

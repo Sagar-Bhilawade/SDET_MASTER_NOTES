@@ -8,7 +8,7 @@ assertion issue, or CI-only problem.
 
 ## 2. Why It Matters In Interviews
 
-At 3.8+ years, "I rerun it" is not enough. Interviewers expect a systematic debugging
+At 4+ years, "I rerun it" is not enough. Interviewers expect a systematic debugging
 workflow using trace, screenshot, video, console/network evidence, and local reproduction.
 
 ## 3. Complete Topic Breakdown

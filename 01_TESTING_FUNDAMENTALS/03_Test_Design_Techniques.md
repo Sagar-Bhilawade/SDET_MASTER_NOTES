@@ -8,7 +8,7 @@ random testing and give maximum meaningful coverage with minimum duplicate cases
 ## 2. Why It Matters In Interviews
 
 Because ISTQB is on the resume, EP, BVA, decision tables, and state transition testing
-are fair questions. At 3.8+ years, the answer must include examples and automation
+are fair questions. At 4+ years, the answer must include examples and automation
 conversion, not only definitions.
 
 ## 3. Complete Topic Breakdown

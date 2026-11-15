@@ -16,6 +16,9 @@ Use it for:
 - AI basics for QA, Copilot context, model/mode vocabulary, prompting patterns, and
   interview-safe boundaries
 - honest Selenium/Java AI-assistance patterns without claiming production agents
+- AI risks, privacy, failure analysis, test data, and the interview Q&A bank (notes 13-19)
+
+Testing products that have AI inside (RAG, evals, red teaming) lives in `12_TESTING_AI_SYSTEMS`.
 - VS Code + GitHub Copilot daily SDET workflows: Ask/Edit/Agent/Plan, custom agents,
   prompt files, skills, MCP, and context control
 

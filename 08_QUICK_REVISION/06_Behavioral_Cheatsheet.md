@@ -21,7 +21,7 @@ Two rules: **separate "I" vs "we"** (they can't credit what they can't attribute
 
 ## The self-intro (30 sec, memorize the shape)
 
-> "SDET, 3.8+ years at NielsenIQ across manual and automation testing. Current track:
+> "SDET, 4+ years at NielsenIQ across manual and automation testing. Current track:
 > Playwright + TypeScript UI E2E automation with API-assisted setup/cleanup, fixtures,
 > AI-assisted QA workflows, and CI execution. Earlier: Selenium + Java with RestAssured,
 > SQL validation, and Jenkins. ISTQB CTFL and Azure AZ-900 certified. Looking for an SDET

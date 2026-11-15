@@ -8,7 +8,7 @@ defects, blockers, and recommendation.
 
 ## 2. Why It Matters In Interviews
 
-At 3.8+ years, interviewers expect you to speak beyond test execution. You should be able
+At 4+ years, interviewers expect you to speak beyond test execution. You should be able
 to explain release confidence, not just say "all test cases passed".
 
 ## 3. Complete Topic Breakdown

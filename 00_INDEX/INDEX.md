@@ -1,6 +1,6 @@
 # SDET MASTER NOTES — MASTER INDEX
 
-**144 notes** · Last updated: 2026-09-10
+**167 notes** · Last updated: 2026-11-15
 
 > **This file is the single source of truth for what exists and what's missing.**
 > Update it whenever a note is added, moved, renamed, or removed.
@@ -28,6 +28,7 @@ foundation  →  tools  →  application  →  practice  →  seniority  →  de
 | **09** | EXTERNAL_REFS | Borrowed PDFs — read from, never copy. Gitignored |
 | **10** | PRACTICAL_ROUNDS | Live/practical rounds — coding, SQL, locators, code review, live UI/API, take-home |
 | **11** | AI_IN_TESTING | AI-assisted QA workflows, agents, story/PR analysis, automation drafting |
+| **12** | TESTING_AI_SYSTEMS | Testing products with AI inside: RAG, LLM evaluation, DeepEval/Ragas, safety, agents |
 
 **Placement rule:** if the answer changes on a different tool → inside a track folder (02/03).
 If the answer would be identical in a Selenium interview → top level.
@@ -56,6 +57,7 @@ Each cross-references the other two.
 | HR / behavioral | `07_INTERVIEW_PREP` |
 | Live coding / SQL / locators / code review / take-home | `10_PRACTICAL_ROUNDS` |
 | AI in testing / agentic QA / AI-assisted automation | `11_AI_IN_TESTING` |
+| Testing an AI/LLM/RAG feature, evals, hallucination, red teaming | `12_TESTING_AI_SYSTEMS` |
 | Final revision (any round) | `08_QUICK_REVISION` |
 
 ---
@@ -63,7 +65,7 @@ Each cross-references the other two.
 ## 01_TESTING_FUNDAMENTALS (13) ✅
 
 Foundation. These are the **manual + automation QA base notes** — asked first in an
-interview, cheap to answer, expensive to fumble. ISTQB CTFL and 3.8+ years across
+interview, cheap to answer, expensive to fumble. ISTQB CTFL and 4+ years across
 manual + automation testing make them fair game.
 
 | # | Note | Covers |
@@ -218,7 +220,7 @@ Tool-agnostic. **Theory paired directly with its practice** — read in order.
 
 ---
 
-## 05_PROCESS_AND_TOOLING (5) ✅
+## 05_PROCESS_AND_TOOLING (9) ✅
 
 | # | Note | Covers |
 |---|------|--------|
@@ -227,6 +229,10 @@ Tool-agnostic. **Theory paired directly with its practice** — read in order.
 | 03 | Docker & Kubernetes | **Rolling deploys break tests**, readiness checks |
 | 04 | Postman & API Tooling | Exploration vs regression, Newman's limits |
 | 05 | Allure Reporting | **History is the differentiator**, failed vs broken |
+| 06 | JMeter Load Testing Fundamentals | Thread group, ramp-up, samplers, CSV/correlation, think time, assertions; standard vs peak; **what I did vs what I'd do** |
+| 07 | JMeter Advanced, Distributed And CI | **Non-GUI command**, `-J` properties, controller/agents `-R`, CI gates, JMeter vs k6/Gatling |
+| 08 | Performance Results Analysis And Reporting | **P90/P95 vs average**, throughput saturation, knee, bottleneck layers, report structure |
+| 09 | Mobile Testing On Cloud Device Labs | LambdaTest manual APK/IPA, device matrix, mobile-specific checks, real vs emulator, no-Appium honesty |
 
 ---
 
@@ -350,7 +356,7 @@ The in-depth locator guide — CSS, XPath, and finding elements in practice. Int
 
 ---
 
-## 11_AI_IN_TESTING (12) 🚧
+## 11_AI_IN_TESTING (19) ✅
 
 AI-assisted QA workflows across the whole testing lifecycle. Separate from Playwright
 tooling because interviewers increasingly ask about AI end-to-end: Jira, PR review, test
@@ -372,6 +378,36 @@ assertions, coverage, and release confidence.
 | 10 | AI In Testing Coverage Map And Study Plan | Full expansion map: AI basics, Copilot, models/modes, agents, Selenium usage, interview boundaries |
 | 11 | VS Code And GitHub Copilot For SDET | Ask/Edit/Agent/Plan modes, custom agents, prompt files, skills, MCP, safe daily workflow |
 | 12 | Copilot Context, MCP, And Skill Files For QA | Context ladder, instructions, references, `.agent.md`, `.prompt.md`, `SKILL.md`, MCP safety |
+| 13 | AI Basics For QA | LLM, token, context window, temperature, hallucination, grounding; prompt vs RAG vs fine-tuning |
+| 14 | Prompting Patterns For QA | Role/task/context/constraints/format; "don't invent, list unknowns"; few-shot style |
+| 15 | AI For Test Data And Environments | Shapes and edge cases yes; isolation, reproducibility, privacy stay mine |
+| 16 | AI For Failure Analysis And Debugging | Evidence in, ranked hypotheses out; never "add a retry"; test bug vs product bug |
+| 17 | AI With Selenium, Java And RestAssured | Assistant not agent: TestNG skeletons, XPath review, exceptions; honest limits |
+| 18 | AI Risks, Privacy And Governance | Data leakage, wrong-but-confident, low-value tests, accountability, honest claims |
+| 19 | AI In Testing Interview Q&A Bank | 15 speakable answers; four beats: workflow, boundary, review gate, honest number |
+
+---
+
+## 12_TESTING_AI_SYSTEMS (12) ✅
+
+How to **test products that have AI inside** — separate from section 11 (using AI to do QA).
+Studied knowledge, honestly framed: every note maps what transfers from real work (API testing, CI
+gates, JMeter, SQL) and never claims DeepEval/Ragas/red-team tools as hands-on.
+
+| # | Note | Covers |
+|---|------|--------|
+| 01 | Testing AI Systems vs Traditional Testing | Non-determinism, oracle problem, layered approach, what stays classical |
+| 02 | LLM Fundamentals For Testers | Tokens, context window, roles, sampling, embeddings, vector DB, app architecture + test points |
+| 03 | RAG Architecture And Failure Modes | Ingestion vs query, chunking, retrieval, **failure modes by stage**, permissions, injection |
+| 04 | Testing A RAG Pipeline | Dataset design, **recall@k/precision@k/MRR/nDCG**, faithfulness, relevancy, unanswerable cases |
+| 05 | LLM Evaluation Methods And Metrics | Code checks, ROUGE/BLEU limits, semantic similarity, **LLM-as-judge and its biases**, calibration |
+| 06 | DeepEval And Ragas Hands-On | pytest-style metrics, G-Eval, Ragas RAG metrics, promptfoo/garak, cost/variance cautions |
+| 07 | Hallucination, Grounding And Guardrails | Fabrication vs contradiction, tempting test cases, guardrail false positives/negatives |
+| 08 | AI Safety, Security And Red Teaming | **OWASP LLM Top 10 (2025)**, prompt injection (direct/indirect), leakage, excessive agency |
+| 09 | Testing AI Agents And Tool Use | Outcome + trajectory + tool-call accuracy, mocked tools, fault injection, MCP tools as APIs |
+| 10 | Datasets, Regression And CI For LLM Apps | Golden dataset, versioning, PR smoke vs nightly full, thresholds as gates |
+| 11 | Performance, Cost And Reliability Of LLM Apps | JMeter + TTFT, tokens/cost, 429 handling, stub vs real model, unbounded consumption |
+| 12 | How I Would Test An AI Feature | Framework, three walkthroughs, honest-positioning script, Q&A bank |
 
 ---
 
@@ -379,15 +415,13 @@ assertions, coverage, and release confidence.
 
 | Gap | Priority | Notes needed |
 |-----|:---:|:---:|
-| **AI in Testing expanded library** | 🔴 High | 8 |
-| └ Add AI basics for QA, prompting patterns, QA agents, test data/environment, debugging/failure analysis, Selenium/Java/RestAssured usage, AI risks/privacy, interview Q&A bank, and quick revision | | |
+| **12_TESTING_AI_SYSTEMS hands-on practice** | 🟡 Medium | — |
+| └ Notes are studied knowledge; a small DeepEval/Ragas exercise on a toy RAG would make the claim real | | |
 | **Gauge, Python** | ⚪ Deferred | — |
 | └ On the resume; Sagar's call to revisit later | | |
 
 > Learning arc, interview-prep, practical rounds, and the revision layer are strong.
-> AI in Testing is being expanded because the interview market now probes it deeply:
-> Copilot usage, agents, model/mode vocabulary, context control, safe automation drafting,
-> privacy boundaries, and honest tool claims.
+> AI is covered twice: 11 = using AI in QA, 12 = testing AI products.
 
 ---
 
@@ -395,7 +429,7 @@ assertions, coverage, and release confidence.
 
 | Metric | Value | Belongs to |
 |--------|-------|-----------|
-| Total experience | 3.8+ years across manual + automation testing | — |
+| Total experience | 4+ years across manual + automation testing | — |
 | Automated scenarios | 300+ | CIP_LEGACY |
 | Regression coverage | 90% | NielsenIQ overall |
 | CI/CD feedback loop | **40 → 12 min** | BASES_PLAYWRIGHT |

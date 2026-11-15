@@ -22,7 +22,7 @@ Playwright, TypeScript, Azure DevOps, GitHub Actions. UI E2E automation with API
 
 **How to say it in 30 seconds:**
 
-> "I've spent 3.8+ years across manual and automation testing in two quite different stacks. The first two years were enterprise legacy — Selenium with Java, API validation with RestAssured, database testing, Jenkins pipelines. Since the start of 2025 I've been on modern Playwright with TypeScript: UI E2E automation with API-assisted setup/cleanup and CI execution through Azure DevOps/GitHub Actions. Having built in both means I've seen where each approach actually fits, which shapes how I make tooling decisions now."
+> "I've spent 4+ years across manual and automation testing in two quite different stacks. The first two years were enterprise legacy — Selenium with Java, API validation with RestAssured, database testing, Jenkins pipelines. Since the start of 2025 I've been on modern Playwright with TypeScript: UI E2E automation with API-assisted setup/cleanup and CI execution through Azure DevOps/GitHub Actions. Having built in both means I've seen where each approach actually fits, which shapes how I make tooling decisions now."
 
 ---
 

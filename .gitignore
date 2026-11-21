@@ -6,3 +6,6 @@
 # Temporary, company-specific interview prep scratchpads.
 # These can duplicate main notes and be deleted after the interview.
 TEMP_INTERVIEW_PREP/
+
+# Personal reading/revision progress data.
+00_INDEX/PROGRESS_TRACKER.md

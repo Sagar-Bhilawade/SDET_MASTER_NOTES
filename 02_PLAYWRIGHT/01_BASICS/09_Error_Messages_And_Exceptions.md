@@ -23,7 +23,7 @@ the failure before increasing timeout or adding `force`.
 | 403 | Authenticated but not authorized | Role/permission |
 | Browser missing | Browsers not installed | `npx playwright install` |
 | No tests found | Pattern/project mismatch | `testDir`, `testMatch`, command |
-| `test.only` blocked | Focused test in CI | `forbidOnly: !!process.env.CI` |
+| `test.only` blocked | Focused test in CI | `forbidOnly: !!process.env.CI` (explained in `02_FRAMEWORK/05_Config_Files`) |
 
 ## 4. Manual Testing Angle
 

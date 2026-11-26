@@ -14,17 +14,17 @@ behavior.
 
 ## 3. Complete Topic Breakdown
 
-| Area | Config/use option |
-|---|---|
-| Device profile | `...devices['iPhone 13']` |
-| Viewport | `viewport: { width, height }` |
-| Touch/mobile | `isMobile`, `hasTouch` via device |
-| Locale | `locale: 'en-GB'` |
-| Timezone | `timezoneId: 'Asia/Kolkata'` |
-| Permissions | `permissions: ['geolocation']` |
-| Geolocation | `geolocation: { latitude, longitude }` |
-| Color scheme | `colorScheme: 'dark'` |
-| Browser channel | `channel: 'chrome'` |
+| Area            | Config/use option                        |
+| --------------- | ---------------------------------------- |
+| Device profile  | `...devices['iPhone 13']`              |
+| Viewport        | `viewport: { width, height }`          |
+| Touch/mobile    | `isMobile`, `hasTouch` via device    |
+| Locale          | `locale: 'en-GB'`                      |
+| Timezone        | `timezoneId: 'Asia/Kolkata'`           |
+| Permissions     | `permissions: ['geolocation']`         |
+| Geolocation     | `geolocation: { latitude, longitude }` |
+| Color scheme    | `colorScheme: 'dark'`                  |
+| Browser channel | `channel: 'chrome'`                    |
 
 ## 4. Manual Testing Angle
 
